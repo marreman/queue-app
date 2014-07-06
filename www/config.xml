@@ -28,6 +28,7 @@
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
+    <gap:plugin name="pl.makingwaves.estimotebeacons" />
 
     <icon src="graphics/icon/144x144.png" />
     <icon gap:platform="ios" height="57" src="graphics/icon/57x57.png" width="57" />
