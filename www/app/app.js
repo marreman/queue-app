@@ -4,6 +4,17 @@ var Hammer = require('hammerjs')
   , Location = require('./components/location.jsx')
   , React = require('react');
 
+alert(window.EstimoteBeacons);
+
+//window.EstimoteBeacons.startRangingBeaconsInRegion(function () {
+    ////every now and then get the list of beacons in range
+    //setInterval(function () {
+        //window.EstimoteBeacons.getBeacons(function (data) {
+            ////do something cool with the list of beacons
+        //});
+    //}, 1000);
+//});
+
 var current = {
   x: 0,
   y: 0
