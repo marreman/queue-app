@@ -1,0 +1,29 @@
+{
+  "name": "queueApp",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Martin Liberg <mr.liberg@gmail.com> (http://martinliberg.se/)",
+  "license": "ISC",
+  "scripts": {
+    "start": "watchify app/app.js -o app/bundle.js -v -d"
+  },
+  "dependencies": {
+    "envify": "^1.2.1",
+    "hammerjs": "^1.1.3",
+    "react": "^0.10.0"
+  },
+  "devDependencies": {
+    "browserify": "^4.2.0",
+    "reactify": "^0.13.1"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  }
+}

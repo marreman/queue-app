@@ -1,10 +1,30 @@
+/** @jsx React.DOM */
+
+var Hammer = require('hammerjs')
+  , Location = require('./components/location.jsx')
+  , React = require('react');
+
 var current = {
   x: 0,
   y: 0
 };
-var $app = $('.app');
+var app = document.querySelector('.app');
 
-var min = $app.find('.location').length * window.innerWidth * -1;
+var App = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <Location color="red" />
+        <Location color="green" />
+        <Location color="blue" />
+      </div>
+    );
+  }
+});
+
+React.renderComponent(<App />, app);
+
+var min = app.querySelectorAll('.location').length * window.innerWidth * -1;
 var max = 0;
 
 function move(x, y) {
@@ -14,7 +34,7 @@ function move(x, y) {
 
   current.x = x !== undefined ? x : current.x;
   current.y = y !== undefined ? y : current.y;
-  $app.css('-webkit-transform', 'translate3d(' + current.x + 'px, ' + current.y + 'px, 0)');
+  app.style.webkitTransform = 'translate3d(' + current.x + 'px, ' + current.y + 'px, 0)';
 }
 
 Hammer(document.body).on('dragend', function (event) {
