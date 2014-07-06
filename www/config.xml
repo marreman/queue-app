@@ -41,11 +41,11 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
-    <icon src="icon.png" />
+    <icon src="graphics/icon/144x144.png" />
     <icon gap:platform="ios" height="57" src="res/icon/ios/icon-57.png" width="57" />
     <icon gap:platform="ios" height="72" src="res/icon/ios/icon-72.png" width="72" />
     <icon gap:platform="ios" height="114" src="res/icon/ios/icon-57-2x.png" width="114" />
-    <icon gap:platform="ios" height="144" src="res/icon/ios/icon-72-2x.png" width="144" />
+    <icon gap:platform="ios" height="144" src="graphics/icon/144x144.png" width="144" />
     <gap:splash gap:platform="ios" height="480" src="graphics/splashscreen/320x480.png" width="320" />
     <gap:splash gap:platform="ios" height="960" src="graphics/splashscreen/640x960.png" width="640" />
     <gap:splash gap:platform="ios" height="1136" src="graphics/splashscreen/640x1136.png" width="640" />
