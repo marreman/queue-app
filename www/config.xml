@@ -7,6 +7,7 @@
     <author email="mr.liberg@gmail.com" href="http://jointhecarnival.com">
       Martin Liberg with Join the Carnival
     </author>
+
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.4.0" />
     <preference name="orientation" value="default" />
@@ -23,6 +24,7 @@
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
+
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.media-capture" />
@@ -41,6 +43,7 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
+
     <icon src="graphics/icon/144x144.png" />
     <icon gap:platform="ios" height="57" src="graphics/icon/57x57.png" width="57" />
     <icon gap:platform="ios" height="72" src="graphics/icon/72x72.png" width="72" />
@@ -51,5 +54,6 @@
     <gap:splash gap:platform="ios" height="1136" src="graphics/splashscreen/640x1136.png" width="640" />
     <gap:splash gap:platform="ios" height="1024" src="graphics/splashscreen/768x1024.png" width="768" />
     <gap:splash gap:platform="ios" height="768" src="graphics/splashscreen/1024x768.png" width="1024" />
+
     <access origin="*" />
 </widget>
