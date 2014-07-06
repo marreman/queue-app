@@ -1,6 +1,4 @@
-/** @jsx React.DOM */
-
 var React = require('react')
   , App = require('./components/app.jsx');
 
-React.renderComponent(<App />, document.querySelector('.wrapper'));
+React.renderComponent(App(), document.querySelector('.wrapper'));

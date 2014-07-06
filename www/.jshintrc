@@ -1,0 +1,17 @@
+{
+  "curly": true,
+  "eqnull": true,
+  "eqeqeq": true,
+  "undef": true,
+  "unused": true,
+  "laxcomma": true,
+  "camelcase": true,
+  "nonbsp": true,
+  "maxparams": 3,
+  "maxlen": 80,
+  "browser": true,
+  "globals": {
+    "module": true,
+    "require": true
+  }
+}

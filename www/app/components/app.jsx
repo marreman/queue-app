@@ -22,13 +22,14 @@ var App = React.createClass({
     LocationStore.on(constants.LOCATIONS_UPDATED_EVENT, function () {
       this.setState({
         locations: LocationStore.getLocations()
-      })
+      });
     }.bind(this));
   },
 
   componentDidUpdate: function () {
     // everytime we get new data
-    min = this.getDOMNode().querySelectorAll('.location').length * window.innerWidth * -1;
+    var locations = this.getDOMNode().querySelectorAll('.location');
+    min = locations.length * window.innerWidth * -1;
   },
 
   componentDidMount: function () {
@@ -57,6 +58,7 @@ var App = React.createClass({
   },
 
   move: function (x, y) {
+    var tpl = 'translate3d(%xpx, %ypx, 0)';
     // don't move if we're about to move past the last
     // location or before the first
     if (x !== undefined && (x === min || x > max)) {
@@ -65,7 +67,9 @@ var App = React.createClass({
 
     current.x = x !== undefined ? x : current.x;
     current.y = y !== undefined ? y : current.y;
-    this.getDOMNode().style.webkitTransform = 'translate3d(' + current.x + 'px, ' + current.y + 'px, 0)';
+    this.getDOMNode().style.webkitTransform = tpl
+      .replace('%x', current.x)
+      .replace('%y', current.y);
   }
 
 });

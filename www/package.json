@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "browserify": "^4.2.0",
+    "grunt": "^0.4.5",
+    "grunt-jsxhint": "0.0.2",
     "reactify": "^0.13.1"
   },
   "browserify": {

@@ -14,7 +14,7 @@ api = merge(EventEmitter.prototype, {
 
 ref.on('value', function (snap) {
   locations = snap.val();
-  api.emit(constants.LOCATIONS_UPDATED_EVENT)
+  api.emit(constants.LOCATIONS_UPDATED_EVENT);
 });
 
 module.exports = api;
