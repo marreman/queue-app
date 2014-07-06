@@ -4,6 +4,7 @@ html {
 
 body {
   margin: 0;
+  color: white;
 }
 
 .wrapper, .app {
@@ -34,22 +35,8 @@ body {
  -webkit-transform: translateX(200%);
 }
 
-.pane {
+.location-part {
   height: 50%;
-}
-
-.pane-blue {
-  background: blue;
-}
-
-.pane-yellow {
-  background: yellow;
-}
-
-.pane-green {
-  background: green;
-}
-
-.pane-red {
-  background: red;
+  overflow: hidden;
+  text-align: center;
 }

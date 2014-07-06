@@ -4,14 +4,12 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "watchify app/app.js -o app/bundle.js -v -d"
   },
   "author": "Martin Liberg <mr.liberg@gmail.com> (http://martinliberg.se/)",
   "license": "ISC",
-  "scripts": {
-    "start": "watchify app/app.js -o app/bundle.js -v -d"
-  },
   "dependencies": {
+    "client-firebase": "^1.0.1",
     "envify": "^1.2.1",
     "hammerjs": "^1.1.3",
     "react": "^0.10.0"

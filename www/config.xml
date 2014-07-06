@@ -1,45 +1,47 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.queue-app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Queue App</name>
-    <description>
-      More fin when standing in queues
-    </description>
-    <author email="mr.liberg@gmail.com" href="http://jointhecarnival.com">
-      Martin Liberg with Join the Carnival
-    </author>
+  <name>Queue App</name>
+  <description>
+    More fin when standing in queues
+  </description>
+  <author email="mr.liberg@gmail.com" href="http://jointhecarnival.com">
+    Martin Liberg with Join the Carnival
+  </author>
 
-    <preference name="permissions" value="none" />
-    <preference name="phonegap-version" value="3.4.0" />
-    <preference name="orientation" value="default" />
-    <preference name="target-device" value="universal" />
-    <preference name="fullscreen" value="true" />
-    <preference name="webviewbounce" value="false" />
-    <preference name="prerendered-icon" value="true" />
-    <preference name="stay-in-webview" value="false" />
-    <preference name="ios-statusbarstyle" value="black-opaque" />
-    <preference name="detect-data-types" value="true" />
-    <preference name="exit-on-suspend" value="false" />
-    <preference name="show-splash-screen-spinner" value="true" />
-    <preference name="auto-hide-splash-screen" value="true" />
-    <preference name="disable-cursor" value="false" />
-    <preference name="android-minSdkVersion" value="7" />
-    <preference name="android-installLocation" value="auto" />
+  <preference name="permissions" value="none" />
+  <preference name="phonegap-version" value="3.4.0" />
+  <preference name="orientation" value="default" />
+  <preference name="target-device" value="universal" />
+  <preference name="fullscreen" value="true" />
+  <preference name="webviewbounce" value="false" />
+  <preference name="prerendered-icon" value="true" />
+  <preference name="stay-in-webview" value="false" />
+  <preference name="ios-statusbarstyle" value="black-opaque" />
+  <preference name="detect-data-types" value="true" />
+  <preference name="exit-on-suspend" value="false" />
+  <preference name="show-splash-screen-spinner" value="true" />
+  <preference name="auto-hide-splash-screen" value="true" />
+  <preference name="disable-cursor" value="false" />
+  <preference name="android-minSdkVersion" value="7" />
+  <preference name="android-installLocation" value="auto" />
+  <preference name="DisallowOverscroll" value="true" />
 
-    <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="org.apache.cordova.dialogs" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
-    <gap:plugin name="pl.makingwaves.estimotebeacons" />
 
-    <icon src="graphics/icon/144x144.png" />
-    <icon gap:platform="ios" height="57" src="graphics/icon/57x57.png" width="57" />
-    <icon gap:platform="ios" height="72" src="graphics/icon/72x72.png" width="72" />
-    <icon gap:platform="ios" height="114" src="graphics/icon/114x114.png" width="114" />
-    <icon gap:platform="ios" height="144" src="graphics/icon/144x144.png" width="144" />
-    <gap:splash gap:platform="ios" height="480" src="graphics/splashscreen/320x480.png" width="320" />
-    <gap:splash gap:platform="ios" height="960" src="graphics/splashscreen/640x960.png" width="640" />
-    <gap:splash gap:platform="ios" height="1136" src="graphics/splashscreen/640x1136.png" width="640" />
-    <gap:splash gap:platform="ios" height="1024" src="graphics/splashscreen/768x1024.png" width="768" />
-    <gap:splash gap:platform="ios" height="768" src="graphics/splashscreen/1024x768.png" width="1024" />
+  <gap:plugin name="org.apache.cordova.device" />
+  <gap:plugin name="org.apache.cordova.dialogs" />
+  <gap:plugin name="org.apache.cordova.splashscreen" />
+  <gap:plugin name="pl.makingwaves.estimotebeacons" />
 
-    <access origin="*" />
+  <icon src="www/graphics/icon/144x144.png" />
+  <icon gap:platform="ios" height="57" src="www/graphics/icon/57x57.png" width="57" />
+  <icon gap:platform="ios" height="72" src="www/graphics/icon/72x72.png" width="72" />
+  <icon gap:platform="ios" height="114" src="www/graphics/icon/114x114.png" width="114" />
+  <icon gap:platform="ios" height="144" src="www/graphics/icon/144x144.png" width="144" />
+  <gap:splash gap:platform="ios" height="480" src="www/graphics/splashscreen/320x480.png" width="320" />
+  <gap:splash gap:platform="ios" height="960" src="www/graphics/splashscreen/640x960.png" width="640" />
+  <gap:splash gap:platform="ios" height="1136" src="www/graphics/splashscreen/640x1136.png" width="640" />
+  <gap:splash gap:platform="ios" height="1024" src="www/graphics/splashscreen/768x1024.png" width="768" />
+  <gap:splash gap:platform="ios" height="768" src="www/graphics/splashscreen/1024x768.png" width="1024" />
+
+  <access origin="*" />
 </widget>
