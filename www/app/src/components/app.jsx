@@ -34,6 +34,7 @@ var App = React.createClass({
 
   componentDidMount: function () {
     Hammer(document.body).on('dragend', function (event) {
+      event.gesture.preventDefault();
       switch (event.gesture.direction) {
       case 'up':
         this.move(undefined, window.innerHeight * -1); break;

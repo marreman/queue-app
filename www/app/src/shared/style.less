@@ -1,0 +1,154 @@
+@oswaldFontPath: "../assets/oswald-font";
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Oswald Light'), local('Oswald-Light'), url("@{oswaldFontPath}/light.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oswald Regular'), local('Oswald-Regular'), url("@{oswaldFontPath}/regular.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Oswald Bold'), local('Oswald-Bold'), url("@{oswaldFontPath}/bold.ttf") format('truetype');
+}
+
+html {
+  background-color: black;
+}
+
+body {
+  margin: 0;
+  color: white;
+  font-family: Oswald;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-light {
+  font-weight: 300;
+}
+
+h1, h2, h3, p {
+  font-weight: inherit;
+}
+
+.wrapper, .app {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+.app {
+  -webkit-transition: -webkit-transform .3s;
+}
+
+.location {
+  position: absolute;
+  width: 100%;
+  height: 200%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.location + .location {
+ -webkit-transform: translateX(100%);
+}
+
+.location + .location + .location {
+ -webkit-transform: translateX(200%);
+}
+
+.location-part {
+  position: relative;
+  height: 50%;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-top: 10px;
+}
+
+.location-top-bar {
+  overflow: hidden;
+  padding: 20px;
+}
+
+.location-logo {
+  float: left;
+  width: 145px;
+}
+
+.location-info {
+  float: right;
+  width: 31px;
+  margin-top: 3px;
+}
+
+.location-eta {
+  margin-top: 70px;
+  text-align: center;
+  line-height: 1.1;
+  text-shadow: 0 0 20px #000;
+}
+
+.location-eta-value {
+  font-size: 130px;
+  font-weight: 400;
+}
+
+.location-arrow {
+  margin-top: 10px;
+}
+
+.location-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 0;
+  background-color: white;
+  color: black;
+}
+
+.location-number-of-people {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.location-gender-distribution {
+  font-size: 130px;
+  line-height: 1;
+  text-align: right;
+  padding-right: 30px;
+}
+
+.location-gender {
+  margin-top: 20px;
+}
+
+.location-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin: 0 5px;
+  border-radius: 100%;
+  background-color: rgba(0,150,255,.3);
+  border: 2px solid #00b4ff;
+  box-sizing: border-box;
+}
+
+.location-dot-current {
+  background-color: #00b4ff;
+}

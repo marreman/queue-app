@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
-      all: ['Gruntfile.js', 'app/**/*.js', 'app/**/*.jsx'],
+      all: ['Gruntfile.js', 'app/src/**/*.js', 'app/src/**/*.jsx'],
       options: {
         jshintrc: true
       }
@@ -27,24 +27,34 @@ module.exports = function(grunt) {
           zeroUnits: true,
         },
         files: {
-          'app/bundle.css': ['app/**/*.less', 'app/**/*.css']
+          'app/bundle.css': ['app/src/**/*.less', 'app/src/**/*.css']
         }
       },
       dist: {
         options: {
-          compile: true,
-          compress: true,
+          compile: true
         },
         files: {
-          'app/bundle.css': ['app/**/*.less', 'app/**/*.css']
+          'app/dist/bundle.css': ['app/src/**/*.less', 'app/src/**/*.css']
         }
       }
+    },
+
+    watch: {
+      scripts: {
+        files: ['app/src/**/*.css', 'app/src/**/*.less'],
+        tasks: ['recess:dist'],
+        options: {
+          spawn: false,
+        },
+      },
     }
 
   });
 
   grunt.loadNpmTasks('grunt-jsxhint');
   grunt.loadNpmTasks('grunt-recess');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['jshint', 'recess:lint']);
 

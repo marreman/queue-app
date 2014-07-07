@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "watchify app/app.js -o app/bundle.js -v -d"
+    "start": "watchify app/src/app.js -o app/dist/bundle.js -v -d"
   },
   "author": "Martin Liberg <mr.liberg@gmail.com> (http://martinliberg.se/)",
   "license": "ISC",
@@ -17,6 +17,7 @@
   "devDependencies": {
     "browserify": "^4.2.0",
     "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
     "grunt-jsxhint": "0.0.2",
     "grunt-recess": "^0.6.1",
     "reactify": "^0.13.1"
