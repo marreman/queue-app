@@ -1,62 +1,3 @@
-@oswaldFontPath: "../assets/oswald-font";
-
-@font-face {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Oswald Light'), local('Oswald-Light'), url("@{oswaldFontPath}/light.ttf") format('truetype');
-}
-@font-face {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Oswald Regular'), local('Oswald-Regular'), url("@{oswaldFontPath}/regular.ttf") format('truetype');
-}
-@font-face {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Oswald Bold'), local('Oswald-Bold'), url("@{oswaldFontPath}/bold.ttf") format('truetype');
-}
-
-html {
-  background-color: black;
-}
-
-body {
-  margin: 0;
-  color: white;
-  font-family: Oswald;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-light {
-  font-weight: 300;
-}
-
-h1, h2, h3, p {
-  font-weight: inherit;
-}
-
-.wrapper, .app {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.wrapper {
-  overflow: hidden;
-}
-
-.app {
-  -webkit-transition: -webkit-transform .3s;
-}
-
 .location {
   position: absolute;
   width: 100%;
@@ -88,12 +29,10 @@ h1, h2, h3, p {
 
 .location-logo {
   float: left;
-  width: 145px;
 }
 
 .location-info {
   float: right;
-  width: 31px;
   margin-top: 3px;
 }
 

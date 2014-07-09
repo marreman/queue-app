@@ -9,6 +9,7 @@ var ArrowIcon = React.createClass({
     if (this.props.direction === 'up') {
       style['-webkit-transform'] = 'rotate(180deg)';
     }
+
     return (
       <img width="32" style={style} src="app/assets/icon-arrow.png" />
     );

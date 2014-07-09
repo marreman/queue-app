@@ -4,7 +4,7 @@ var Hammer = require('hammerjs')
   , React = require('react')
   , constants = require('../shared/constants')
   , LocationStore = require('../shared/location-store')
-  , Location = require('./location.jsx');
+  , Location = require('./location/location.jsx');
 
 var current = { x: 0, y: 0 }
   , min = 0
