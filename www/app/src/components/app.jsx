@@ -47,9 +47,7 @@ var App = React.createClass({
   },
 
   render: function () {
-    var i = -1
-      , locations = Object.keys(this.state.locations).map(function (key) {
-        i++;
+    var locations = Object.keys(this.state.locations).map(function (key, i) {
         return (<Location index={i} data={this.state.locations[key]} />);
     }.bind(this));
 
