@@ -1,12 +1,13 @@
 /** @jsx React.DOM */
 
 var React = require('react')
+  , config = require('../../shared/config')
   , LocationTop = require('./location-top.jsx')
   , LocationBottom = require('./location-bottom.jsx');
 
 var Location = React.createClass({
   render: function () {
-    var bgUrl = 'app/assets/' +  this.props.data.key + '/background.jpg'
+    var bgUrl = config.assetsPath + '/' +  this.props.data.key + '/background.jpg'
       , style = {
         backgroundImage: 'url(' + bgUrl + ')'
       };
