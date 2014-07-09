@@ -6,6 +6,12 @@ var React = require('react')
   , Logo = require('./logo.jsx');
 
 var LocationTop = React.createClass({
+
+  componentDidMount: function () {
+    var dots = this.getDOMNode().querySelectorAll('.location-dot');
+    dots[this.props.index].classList.add('location-dot-current');
+  },
+
   render: function () {
     return (
       <div className="location-part">
@@ -21,13 +27,13 @@ var LocationTop = React.createClass({
           <div className="location-eta-label">Ungefärlig kötid:</div>
           <div className="location-eta-value">00:14</div>
         </div>
-        <div className="location-dots text-center">
-          <span className="location-dot location-dot-current"></span>
-          <span className="location-dot"></span>
-          <span className="location-dot"></span>
-        </div>
         <div className="location-bottom-bar">
-          <div className="location-number-of-people text-center">
+          <div className="location-dots text-center">
+            <span className="location-dot"></span>
+            <span className="location-dot"></span>
+            <span className="location-dot"></span>
+          </div>
+          <div className="location-white-bar location-number-of-people text-center">
             46 st
             <span className="text-light"> sköna katter före dig</span>
             <div className="location-arrow">
@@ -38,6 +44,7 @@ var LocationTop = React.createClass({
       </div>
     );
   }
+
 });
 
 module.exports = LocationTop;
