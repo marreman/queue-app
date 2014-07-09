@@ -1,20 +1,22 @@
 var EventEmitter = require('events').EventEmitter
-  , merge = require('react/lib/merge')
-  , constants = require('./constants')
-  , ref = require('./firebase').getReference('locations');
+  , firebase = require('./firebase');
 
 var locations = {}
-  , api;
-
-api = merge(EventEmitter.prototype, {
-  getLocations: function () {
-    return locations;
-  }
-});
+  , ref = firebase.getReference('locations')
+  , events = new EventEmitter()
+  , LOCATIONS_UPDATED_EVENT = 'locations-updated-event';
 
 ref.on('value', function (snap) {
   locations = snap.val();
-  api.emit(constants.LOCATIONS_UPDATED_EVENT);
+  events.emit(LOCATIONS_UPDATED_EVENT);
 });
 
-module.exports = api;
+module.exports = {
+  getLocations: function () {
+    return locations;
+  },
+  onLocationsUpdated: function (callback) {
+    events.on(LOCATIONS_UPDATED_EVENT, callback)
+  }
+};
+

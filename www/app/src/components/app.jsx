@@ -2,7 +2,6 @@
 
 var Hammer = require('hammerjs')
   , React = require('react')
-  , constants = require('../shared/constants')
   , LocationStore = require('../shared/location-store')
   , Location = require('./location/location.jsx');
 
@@ -19,7 +18,7 @@ var App = React.createClass({
   },
 
   componentWillMount: function () {
-    LocationStore.on(constants.LOCATIONS_UPDATED_EVENT, function () {
+    LocationStore.onLocationsUpdated(function () {
       this.setState({
         locations: LocationStore.getLocations()
       });
@@ -27,7 +26,6 @@ var App = React.createClass({
   },
 
   componentDidUpdate: function () {
-    // everytime we get new data
     var locations = this.getDOMNode().querySelectorAll('.location');
     min = locations.length * window.innerWidth * -1;
   },
