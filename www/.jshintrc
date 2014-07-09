@@ -8,7 +8,7 @@
   "camelcase": true,
   "nonbsp": true,
   "maxparams": 3,
-  "maxlen": 80,
+  "maxlen": 120,
   "browser": true,
   "globals": {
     "module": true,

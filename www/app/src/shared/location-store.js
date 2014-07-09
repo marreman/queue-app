@@ -16,7 +16,7 @@ module.exports = {
     return locations;
   },
   onLocationsUpdated: function (callback) {
-    events.on(LOCATIONS_UPDATED_EVENT, callback)
+    events.on(LOCATIONS_UPDATED_EVENT, callback);
   }
 };
 
