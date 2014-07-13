@@ -2,15 +2,20 @@
   "locations": {
     "30262-26692": {
       "key": "solidaritet",
-      "name": "Solidaritet"
+      "name": "Solidaritet",
+      "visitors": {}
     },
     "61693-33634": {
       "key": "tradgarden",
-      "name": "Trädgården"
+      "name": "Trädgården",
+      "visitors": {}
     },
     "7866-43187": {
       "key": "strand",
-      "name": "Strand"
+      "name": "Strand",
+      "visitors": {}
     }
+  },
+  "users": {
   }
 }

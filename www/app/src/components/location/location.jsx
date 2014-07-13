@@ -1,13 +1,14 @@
 /** @jsx React.DOM */
 
 var React = require('react')
-  , config = require('../../shared/config')
+  , assetsPathMixin = require('./assets-path-mixin')
   , LocationTop = require('./location-top.jsx')
   , LocationBottom = require('./location-bottom.jsx');
 
 var Location = React.createClass({
+  mixins: [assetsPathMixin],
   render: function () {
-    var bgUrl = config.assetsPath + '/' +  this.props.data.key + '/background.jpg'
+    var bgUrl = this.getLocationPath(this.props.data.key) + '/background.jpg'
       , style = {
         backgroundImage: 'url(' + bgUrl + ')'
       };

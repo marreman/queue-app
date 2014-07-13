@@ -1,5 +1,5 @@
 var EventEmitter = require('events').EventEmitter
-  , firebase = require('./firebase');
+  , firebase = require('../shared/firebase');
 
 var locations = {}
   , ref = firebase.getReference('locations')

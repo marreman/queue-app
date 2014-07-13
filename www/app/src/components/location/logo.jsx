@@ -1,11 +1,12 @@
 /** @jsx React.DOM */
 
 var React = require('react')
-  , config = require('../../shared/config');
+  , assetsPathMixin = require('./assets-path-mixin');
 
 var Logo = React.createClass({
+  mixins: [assetsPathMixin],
   render: function () {
-    var url = config.assetsPath + '/' +  this.props.locationKey + '/logo.png';
+    var url = this.getLocationPath(this.props.locationKey) + '/logo.png';
 
     return (
       <img width="145" src={url} />
