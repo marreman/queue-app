@@ -23,8 +23,11 @@ var Modal = React.createClass({
     });
 
     UserStore.onCurrentUserUpdated(function () {
+      var currentUser = UserStore.getCurrentUser()
+        , gender = currentUser ? currentUser.gender : null;
+
       this.setState({
-        gender: UserStore.getCurrentUser().gender
+        gender: gender
       });
     }.bind(this));
 
