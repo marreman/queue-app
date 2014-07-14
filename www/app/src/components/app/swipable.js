@@ -32,8 +32,6 @@ module.exports = {
       return;
     }
 
-    console.log(this);
-
     current.x = x !== undefined ? x : current.x;
     current.y = y !== undefined ? y : current.y;
     this.getDOMNode().style.webkitTransform = tpl

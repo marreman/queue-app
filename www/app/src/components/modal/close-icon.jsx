@@ -3,13 +3,13 @@
 var React = require('react')
   , assetsPathMixin = require('../assets-path-mixin');
 
-var InfoIcon = React.createClass({
+var CloseIcon = React.createClass({
   mixins: [assetsPathMixin],
   render: function () {
     return (
-      <img width="31" src={this.getIconPath('info')} />
+      <img width="22" src={this.getIconPath('close')} />
     );
   }
 });
 
-module.exports = InfoIcon;
+module.exports = CloseIcon;

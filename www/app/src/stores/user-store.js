@@ -10,8 +10,10 @@ var events = new EventEmitter()
 
 var currentUserId = 123; // should be device uuid or other
 
-function createUser(sex) {
-  console.log('supposed to create a user that is ' + sex);
+function createUser(gender) {
+  ref.child(currentUserId).set({
+    gender: gender
+  });
 }
 
 ref.child(currentUserId).on('value', function (snap) {

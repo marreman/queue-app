@@ -3,8 +3,11 @@
 var React = require('react')
   , LocationStore = require('../../stores/location-store')
   , UserStore = require('../../stores/user-store')
-  , Location = require('.././location/location.jsx')
   , actions = require('../../shared/actions')
+  , Location = require('../location/location.jsx')
+  , Modal = require('../modal/modal.jsx')
+  , events = require('../../shared/constants').events
+  , Mediator = require('../../shared/mediator')
   , swipable = require('./swipable');
 
 
@@ -12,8 +15,7 @@ UserStore.onCurrentUserUpdated(function () {
   var currentUser = UserStore.getCurrentUser();
 
   if (!currentUser) {
-    console.log('No current user.. creating one');
-    actions.createUser('male');
+    Mediator.emit(events.SHOW_MODAL);
   } else {
     console.log('Current user is: ', currentUser);
   }
@@ -58,7 +60,10 @@ var App = React.createClass({
     }.bind(this));
 
     return (
-      <div className="app">{locations}</div>
+      <div className="app">
+        {locations}
+        <Modal />
+      </div>
     );
   }
 

@@ -1,4 +1,4 @@
-var constants = require('../../shared/constants');
+var constants = require('../shared/constants');
 
 module.exports = {
   getIconPath: function (iconName) {

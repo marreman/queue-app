@@ -2,7 +2,7 @@
 
 var React = require('react')
   , ArrowIcon = require('./arrow-icon.jsx')
-  , SexIcon = require('./sex-icon.jsx');
+  , SexIcon = require('../sex-icon.jsx');
 
 var LocationBottom = React.createClass({
   render: function () {

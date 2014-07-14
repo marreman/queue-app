@@ -3,7 +3,9 @@
 var React = require('react')
   , InfoIcon = require('./info-icon.jsx')
   , ArrowIcon = require('./arrow-icon.jsx')
-  , Logo = require('./logo.jsx');
+  , Logo = require('./logo.jsx')
+  , Mediator = require('../../shared/mediator')
+  , events = require('../../shared/constants').events;
 
 var LocationTop = React.createClass({
 
@@ -19,9 +21,9 @@ var LocationTop = React.createClass({
           <span className="location-logo">
             <Logo locationKey={this.props.key} />
           </span>
-          <span className="location-info">
+          <a href className="location-info" onClick={this.showModal}>
             <InfoIcon />
-          </span>
+          </a>
         </div>
         <div className="location-eta">
           <div className="location-eta-label">Ungefärlig kötid:</div>
@@ -43,6 +45,11 @@ var LocationTop = React.createClass({
         </div>
       </div>
     );
+  },
+
+  showModal: function (event) {
+    event.preventDefault();
+    Mediator.emit(events.SHOW_MODAL);
   }
 
 });

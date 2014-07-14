@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react')
-  , assetsPathMixin = require('./assets-path-mixin')
+  , assetsPathMixin = require('../assets-path-mixin')
   , LocationTop = require('./location-top.jsx')
   , LocationBottom = require('./location-bottom.jsx');
 

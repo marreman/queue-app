@@ -1,3 +1,5 @@
+@import "../../shared/vars.less";
+
 .location {
   position: absolute;
   width: 100%;
@@ -78,6 +80,11 @@
 
 .location-gender {
   margin-top: 20px;
+
+  img {
+    vertical-align: top;
+    margin-left: -15px;
+  }
 }
 
 .location-dots {
@@ -89,12 +96,12 @@
   width: 14px;
   height: 14px;
   margin: 0 5px;
-  background-color: rgba(0,150,255,.3);
-  border: 2px solid #00b4ff;
+  background-color: @colorHighlightTransparent;
+  border: 2px solid @colorHighlight;
   border-radius: 100%;
   box-sizing: border-box;
 }
 
 .location-dot-current {
-  background-color: #00b4ff;
+  background-color: @colorHighlight;
 }
