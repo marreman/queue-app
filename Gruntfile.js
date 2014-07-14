@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
-      all: ['Gruntfile.js', 'app/src/**/*.js', 'app/src/**/*.jsx'],
+      all: ['Gruntfile.js', 'www/app/src/**/*.js', 'www/app/src/**/*.jsx'],
       options: {
         jshintrc: true
       }
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           zeroUnits: true,
         },
         files: {
-          'app/bundle.css': ['app/src/**/*.less', 'app/src/**/*.css']
+          'www/app/bundle.css': ['www/app/src/**/*.less', 'www/app/src/**/*.css']
         }
       },
       dist: {
@@ -35,14 +35,14 @@ module.exports = function(grunt) {
           compile: true
         },
         files: {
-          'app/dist/bundle.css': ['app/src/**/*.less', 'app/src/**/*.css']
+          'www/app/dist/bundle.css': ['www/app/src/**/*.less', 'www/app/src/**/*.css']
         }
       }
     },
 
     watch: {
       scripts: {
-        files: ['app/src/**/*.css', 'app/src/**/*.less'],
+        files: ['www/app/src/**/*.css', 'www/app/src/**/*.less'],
         tasks: ['recess:dist'],
         options: {
           spawn: false,

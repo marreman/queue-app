@@ -3,7 +3,6 @@
 var React = require('react')
   , LocationStore = require('../../stores/location-store')
   , UserStore = require('../../stores/user-store')
-  , actions = require('../../shared/actions')
   , Location = require('../location/location.jsx')
   , Modal = require('../modal/modal.jsx')
   , events = require('../../shared/constants').events
@@ -58,16 +57,19 @@ var App = React.createClass({
   },
 
   render: function () {
-    var locations = Object.keys(this.state.locations).map(function (key, i) {
-        return (<Location index={i} data={this.state.locations[key]} />);
-    }.bind(this));
+    var locationKeys = Object.keys(this.state.locations);
 
     return (
       <div className="app">
-        {locations}
+        {locationKeys.map(this.createLocationComponent)}
         <Modal />
       </div>
     );
+  },
+
+  createLocationComponent: function (key, i) {
+    var location = this.state.locations[key];
+    return (<Location key={location.key} index={i} data={location} />);
   }
 
 });

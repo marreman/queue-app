@@ -8,7 +8,7 @@ var events = new EventEmitter()
   , CURRENT_USER_UPDATED_EVENT = 'current-user-updated-event'
   , currentUser = {};
 
-var currentUserId = 123; // should be device uuid or other
+var currentUserId = null;
 
 function createUser(gender) {
   ref.child(currentUserId).set({
@@ -16,10 +16,25 @@ function createUser(gender) {
   });
 }
 
-ref.child(currentUserId).on('value', function (snap) {
-  currentUser = snap.val();
-  events.emit(CURRENT_USER_UPDATED_EVENT);
-});
+function subscribeToCurrentUser(id) {
+  console.log(id);
+  currentUserId = id;
+  ref.child(id).on('value', function (snap) {
+    currentUser = snap.val();
+    events.emit(CURRENT_USER_UPDATED_EVENT);
+  });
+}
+
+console.log(window.location.protocol);
+
+if (window.cordova) {
+  document.addEventListener('deviceready', function () {
+    subscribeToCurrentUser(window.device.uuid);
+  }, false);
+} else {
+  subscribeToCurrentUser(123);
+}
+
 
 dispatcher.register(function (payload) {
   switch (payload.actionType) {

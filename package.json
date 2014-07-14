@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "watchify app/src/app.js -o app/dist/bundle.js -v -d"
+    "start": "watchify www/app/src/app.js -o www/app/dist/bundle.js -v -d"
   },
   "author": "Martin Liberg <mr.liberg@gmail.com> (http://martinliberg.se/)",
   "license": "ISC",
