@@ -13,7 +13,7 @@ var Modal = React.createClass({
   getInitialState: function () {
     return {
       isVisible: false,
-      gender: UserStore.getCurrentUser().gender
+      gender: null
     };
   },
 
