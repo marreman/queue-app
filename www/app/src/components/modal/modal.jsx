@@ -3,8 +3,7 @@
 var React = require('react')
   , Hammer = require('hammerjs')
   , UserStore = require('../../stores/user-store')
-  , SexIcon = require('../sex-icon.jsx')
-  , CloseIcon = require('./close-icon.jsx')
+  , Icon = require('../icon.jsx')
   , Mediator = require('../../shared/mediator')
   , events = require('../../shared/constants').events
   , actions = require('../../shared/actions');
@@ -39,7 +38,7 @@ var Modal = React.createClass({
     return (
       <div className="modal" style={style}>
         <a className="modal-close" href onClick={this.toggleVisibility}>
-          <CloseIcon />
+          <Icon type="close" />
         </a>
         <h1>Information</h1>
         <p>
@@ -64,7 +63,7 @@ var Modal = React.createClass({
 
     return (
       <label className={cls}>
-        <SexIcon sex={gender} />
+        <Icon type="sex" mod={gender} />
         <input type="radio" name="sex" value={gender} onChange={this.selectGender} />
       </label>
     );

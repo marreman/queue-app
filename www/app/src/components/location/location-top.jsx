@@ -1,8 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react')
-  , InfoIcon = require('./info-icon.jsx')
-  , ArrowIcon = require('./arrow-icon.jsx')
+  , Icon = require('../icon.jsx')
   , Logo = require('./logo.jsx')
   , Mediator = require('../../shared/mediator')
   , events = require('../../shared/constants').events;
@@ -22,7 +21,7 @@ var LocationTop = React.createClass({
             <Logo locationKey={this.props.key} />
           </span>
           <a href className="location-info" onClick={this.showModal}>
-            <InfoIcon />
+            <Icon type="info" />
           </a>
         </div>
         <div className="location-eta">
@@ -39,7 +38,7 @@ var LocationTop = React.createClass({
             46 st
             <span className="text-light"> sköna katter före dig</span>
             <div className="location-arrow">
-              <ArrowIcon />
+              <Icon type="arrow" />
             </div>
           </div>
         </div>
