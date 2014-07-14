@@ -11,16 +11,6 @@ var React = require('react')
   , swipable = require('./swipable');
 
 
-UserStore.onCurrentUserUpdated(function () {
-  var currentUser = UserStore.getCurrentUser();
-
-  if (!currentUser) {
-    Mediator.emit(events.SHOW_MODAL);
-  } else {
-    console.log('Current user is: ', currentUser);
-  }
-});
-
 var App = React.createClass({
 
   mixins: [swipable],
@@ -32,17 +22,30 @@ var App = React.createClass({
   },
 
   componentWillMount: function () {
-    LocationStore.onLocationsUpdated(function () {
-      var locations = LocationStore.getLocations();
+    UserStore.onCurrentUserUpdated(this.handleCurrentUserUpdate);
+    LocationStore.onLocationsUpdated(this.handleLocationsUpdate);
+  },
 
-      if (!locations) {
-        throw new Error('LocationStore returned no locations');
-      } else {
-        this.setState({
-          locations: locations
-        });
-      }
-    }.bind(this));
+  handleCurrentUserUpdate: function () {
+    var currentUser = UserStore.getCurrentUser();
+
+    if (!currentUser) {
+      Mediator.emit(events.SHOW_MODAL);
+    } else {
+      console.log('Current user is: ', currentUser);
+    }
+  },
+
+  handleLocationsUpdate: function () {
+    var locations = LocationStore.getLocations();
+
+    if (!locations) {
+      throw new Error('LocationStore returned no locations');
+    } else {
+      this.setState({
+        locations: locations
+      });
+    }
   },
 
   componentDidUpdate: function () {
