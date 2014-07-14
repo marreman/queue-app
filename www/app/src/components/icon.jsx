@@ -7,7 +7,7 @@ var iconStyles = {
   close: {
     width: 22
   },
-  sex: {
+  gender: {
     width: 50
   },
   info: {

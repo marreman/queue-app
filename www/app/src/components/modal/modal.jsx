@@ -63,8 +63,8 @@ var Modal = React.createClass({
 
     return (
       <label className={cls}>
-        <Icon type="sex" mod={gender} />
-        <input type="radio" name="sex" value={gender} onChange={this.selectGender} />
+        <Icon type="gender" mod={gender} />
+        <input type="radio" name="gender" value={gender} onChange={this.selectGender} />
       </label>
     );
 

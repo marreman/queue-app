@@ -24,7 +24,7 @@ ref.child(currentUserId).on('value', function (snap) {
 dispatcher.register(function (payload) {
   switch (payload.actionType) {
     case actionTypes.USER_CREATE:
-      createUser(payload.sex);
+      createUser(payload.gender);
       break;
   }
 });

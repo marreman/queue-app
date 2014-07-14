@@ -3,10 +3,10 @@ var dispatcher = require('./dispatcher')
 
 module.exports = {
 
-  createUser: function (sex) {
+  createUser: function (gender) {
     dispatcher.dispatch({
       actionType: actionTypes.USER_CREATE,
-      sex: sex
+      gender: gender
     });
   }
 

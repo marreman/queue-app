@@ -16,13 +16,13 @@ var LocationBottom = React.createClass({
         </div>
         <div className="location-gender-distribution">
           <div className="location-gender">
-            18 <Icon type="sex" mod="male" />
+            18 <Icon type="gender" mod="male" />
           </div>
           <div className="location-gender">
-            22 <Icon type="sex" mod="female" />
+            22 <Icon type="gender" mod="female" />
           </div>
           <div className="location-gender">
-            4 <Icon type="sex" mod="trans" />
+            4 <Icon type="gender" mod="trans" />
           </div>
         </div>
       </div>
