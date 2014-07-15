@@ -30,8 +30,6 @@ var App = React.createClass({
 
     if (!currentUser) {
       Mediator.emit(events.SHOW_MODAL);
-    } else {
-      console.log('Current user is: ', currentUser);
     }
   },
 

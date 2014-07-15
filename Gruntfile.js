@@ -1,22 +1,47 @@
 
 module.exports = function(grunt) {
 
+  var files = {
+    js: 'www/app/src/**/*.js',
+    jsx: 'www/app/src/**/*.jsx',
+    css: 'www/app/src/**/*.css',
+    less: 'www/app/src/**/*.less'
+  };
+
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
 
+    browserify: {
+      dist: {
+        files: {
+          'www/app/dist/bundle.js': [files.js, files.jsx],
+        },
+        options: {
+          transform: ['reactify']
+        }
+      }
+    },
+
     jshint: {
-      all: ['Gruntfile.js', 'www/app/src/**/*.js', 'www/app/src/**/*.jsx'],
+      all: ['Gruntfile.js', files.js, files.jsx],
       options: {
         jshintrc: true
       }
     },
 
     recess: {
+      dist: {
+        options: {
+          compile: true
+        },
+        files: {
+          'www/app/dist/bundle.css': [files.css, files.less]
+        }
+      },
       lint: {
         options: {
           compile: false,
-          compress: false,
           noIDs: true,
           noJSPrefix: true,
           noOverqualifying: true,
@@ -24,38 +49,32 @@ module.exports = function(grunt) {
           noUniversalSelectors: true,
           prefixWhitespace: true,
           strictPropertyOrder: true,
-          zeroUnits: true,
+          zeroUnits: true
         },
         files: {
-          'www/app/bundle.css': ['www/app/src/**/*.less', 'www/app/src/**/*.css']
-        }
-      },
-      dist: {
-        options: {
-          compile: true
-        },
-        files: {
-          'www/app/dist/bundle.css': ['www/app/src/**/*.less', 'www/app/src/**/*.css']
+          'www/app/dist/bundle.css': [files.css, files.less]
         }
       }
+
     },
 
     watch: {
       scripts: {
-        files: ['www/app/src/**/*.css', 'www/app/src/**/*.less'],
-        tasks: ['recess:dist'],
+        files: [files.js, files.jsx, files.css, files.less],
+        tasks: ['recess:dist', 'browserify:dist'],
         options: {
-          spawn: false,
-        },
-      },
+          spawn: false
+        }
+      }
     }
 
   });
 
+  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-jsxhint');
   grunt.loadNpmTasks('grunt-recess');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'recess:lint']);
+  grunt.registerTask('default', ['recess:lint', 'jshint']);
 
 };

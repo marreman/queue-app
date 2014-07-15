@@ -45,7 +45,8 @@ var Modal = React.createClass({
         </a>
         <h1>Information</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+          Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
         </p>
         <p>Välj ditt kön nedan:</p>
         <p>

@@ -17,15 +17,12 @@ function createUser(gender) {
 }
 
 function subscribeToCurrentUser(id) {
-  console.log(id);
   currentUserId = id;
   ref.child(id).on('value', function (snap) {
     currentUser = snap.val();
     events.emit(CURRENT_USER_UPDATED_EVENT);
   });
 }
-
-console.log(window.location.protocol);
 
 if (window.cordova) {
   document.addEventListener('deviceready', function () {
