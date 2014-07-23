@@ -1,35 +1,52 @@
 var Hammer = require('hammerjs');
 
-var current = { x: 0, y: 0 }
+var current = { x: 0, y: 0, paneNumber: 0 }
+  , win = { width: 0, height: 0 }
   , min = 0
   , max = 0;
 
 module.exports = {
+
   swipableInit: function () {
     Hammer(document.body).on('dragend', this.handleDragend);
+    win.width = window.innerWidth;
+    win.height = window.innerHeight;
   },
+
   setNumberOfPanes: function (n) {
-    min = n * window.innerWidth * -1;
+    min = n * win.width * -1;
   },
+
   handleDragend: function (event) {
     event.gesture.preventDefault();
+
     switch (event.gesture.direction) {
+    case 'left':
+      this.moveTo(current.paneNumber + 1, undefined); break;
+    case 'right':
+      this.moveTo(current.paneNumber - 1, undefined); break;
     case 'up':
-      this.move(undefined, window.innerHeight * -1); break;
+      this.move(undefined, win.height * -1); break;
     case 'down':
       this.move(undefined, 0); break;
-    case 'left':
-      this.move(current.x - window.innerWidth, undefined); break;
-    case 'right':
-      this.move(current.x + window.innerWidth, undefined); break;
     }
   },
+
+  moveTo: function (paneNumber) {
+    var goal = win.width * paneNumber * -1;
+
+    if (this.move(goal, undefined)) {
+      current.paneNumber = paneNumber;
+    }
+  },
+
   move: function (x, y) {
     var tpl = 'translate3d(%xpx, %ypx, 0)';
+
     // don't move if we're about to move past the last
     // location or before the first
-    if (x !== undefined && (x === min || x > max)) {
-      return;
+    if (x !== undefined && (x <= min || x > max)) {
+      return false;
     }
 
     current.x = x !== undefined ? x : current.x;
@@ -37,5 +54,8 @@ module.exports = {
     this.getDOMNode().style.webkitTransform = tpl
       .replace('%x', current.x)
       .replace('%y', current.y);
+
+    return true;
   }
+
 };

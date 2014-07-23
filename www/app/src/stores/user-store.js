@@ -1,5 +1,6 @@
 var EventEmitter = require('events').EventEmitter
   , firebase = require('../shared/firebase')
+  , device = require('../shared/device')
   , dispatcher = require('../shared/dispatcher')
   , actionTypes = require('../shared/constants').actionTypes;
 
@@ -24,14 +25,9 @@ function subscribeToCurrentUser(id) {
   });
 }
 
-if (window.cordova) {
-  document.addEventListener('deviceready', function () {
-    subscribeToCurrentUser(window.device.uuid);
-  }, false);
-} else {
-  subscribeToCurrentUser(123);
-}
-
+device.onReady(function (device) {
+  subscribeToCurrentUser(device.uuid);
+});
 
 dispatcher.register(function (payload) {
   switch (payload.actionType) {

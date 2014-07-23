@@ -23,6 +23,7 @@ var App = React.createClass({
   componentWillMount: function () {
     UserStore.onCurrentUserUpdated(this.handleCurrentUserUpdate);
     LocationStore.onLocationsUpdated(this.handleLocationsUpdate);
+    //BeaconStore.onClosestBeaconUpdated(this.handleClosestBeaconUpdated);
   },
 
   handleCurrentUserUpdate: function () {
@@ -45,9 +46,17 @@ var App = React.createClass({
     }
   },
 
+  handleClosestBeaconUpdated: function () {
+    var closestBeacon = BeaconStore.getClosestBeacon()
+      , locationIndex = Object.keys(this.state.locations).indexOf(closestBeacon.id);
+
+    this.moveTo(locationIndex);
+  },
+
   componentDidUpdate: function () {
     var locations = this.getDOMNode().querySelectorAll('.location');
     this.setNumberOfPanes(locations.length);
+
   },
 
   componentDidMount: function () {

@@ -15,7 +15,7 @@ module.exports = function(grunt) {
     browserify: {
       dist: {
         files: {
-          'www/app/dist/bundle.js': [files.js, files.jsx],
+          'www/app/dist/bundle.js': ['www/app/src/app.js'],
         },
         options: {
           transform: ['reactify']
@@ -76,5 +76,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['recess:lint', 'jshint']);
+  grunt.registerTask('test', ['browserify:dist', 'jasmine:test']);
 
 };
