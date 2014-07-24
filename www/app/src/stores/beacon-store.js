@@ -1,71 +1,53 @@
 var device = require('../shared/device')
+  , firebase = require('../shared/firebase')
   , EventEmitter = require('events').EventEmitter;
 
 var currentBeacon = {}
   , events = new EventEmitter()
+  , ref = firebase.getReference('queueSessions')
   , NEW_CLOSEST_BEACON_EVENT = 'NEW_CLOSEST_BEACON_EVENT';
 
 if (!window.EstimoteBeacons) {
-  mockEstimoteBeaconsForDesktop();
+  var EstimoteMock = require('./beacon-store.mock');
+  EstimoteMock.mockApi();
 }
 
+var beaconList = {}
+  , SESSION_END_THRESHOLD = 1.5;
 
-function mockEstimoteBeaconsForDesktop() {
-  var beacons = [
-    {
-      "isConnected":false,
-      "proximity":2,
-      "description":"<ESTBeacon: 0x165d1860>",
-      "debugDescription":"<ESTBeacon: 0x165d1860>",
-      "rssi":-77,
-      "proximityUUID":"B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-      "distance":1.32927555957745,
-      "minor":33634,
-      "major":61693
-    },
-    {
-      "isConnected":false,
-      "proximity":2,
-      "description":"<ESTBeacon: 0x165bd940>",
-      "debugDescription":"<ESTBeacon: 0x165bd940>",
-      "rssi":-70,
-      "proximityUUID":"B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-      "distance":2.6300233029461665,
-      "minor":26692,
-      "major":30262
-    },
-    {
-      "isConnected":false,
-      "proximity":3,
-      "description":"<ESTBeacon: 0x165c9e90>",
-      "debugDescription":"<ESTBeacon: 0x165c9e90>",
-      "rssi":-78,
-      "proximityUUID":"B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-      "distance":2.106791487321135,
-      "minor":43187,
-      "major":7866
-    }
-  ];
-  window.EstimoteBeacons = {
-    startRangingBeaconsInRegion: function (callback) {
-      callback();
-    },
-    getBeacons: function (callback) {
-      callback(beacons);
-    }
-  };
+function Beacon() {
+  this.enteredZoneAt = new Date().getTime();
 }
+
+Beacon.prototype.update = function (data) {
+  this.id = data.major + '-' + data.minor;
+  this.distance = data.distance;
+
+  if (!this.sessionRef && this.distance < SESSION_END_THRESHOLD) {
+    this.endSession();
+  }
+
+  return this;
+};
+
+Beacon.prototype.endSession = function () {
+  this.sessionRef = ref.child(this.id).push({
+    start: this.enteredZoneAt,
+    end: new Date().getTime()
+  });
+};
 
 function handleGetBeacons(beaconsData) {
   if (!beaconsData[0]) {
     return null;
   }
 
-  var beacons = beaconsData.map(function (beacon) {
-    return {
-      id: beacon.major + '-' + beacon.minor,
-      distance: beacon.distance
-    };
+  var beacons = beaconsData.map(function (data) {
+    var id = data.major + '-' + data.minor
+      , beacon = beaconList[id] || new Beacon();
+
+    beaconList[id] = beacon;
+    return beacon.update(data);
   }).sort(function (b1, b2) {
     return b1.distance - b2.distance;
   });
