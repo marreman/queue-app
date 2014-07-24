@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react')
+  , time = require('../../shared/time')
   , Icon = require('../icon.jsx')
   , Logo = require('./logo.jsx')
   , Mediator = require('../../shared/mediator')
@@ -11,6 +12,14 @@ var LocationTop = React.createClass({
   componentDidMount: function () {
     var dots = this.getDOMNode().querySelectorAll('.location-dot');
     dots[this.props.index].classList.add('location-dot-current');
+  },
+
+  formatTime: function (milliseconds) {
+    if (!milliseconds) {
+      return 'N/A';
+    }
+
+    return time.millisecondsToHoursAndMinutes(milliseconds);
   },
 
   render: function () {
@@ -26,7 +35,7 @@ var LocationTop = React.createClass({
         </div>
         <div className="location-eta">
           <div className="location-eta-label">Ungefärlig kötid:</div>
-          <div className="location-eta-value">00:14</div>
+          <div className="location-eta-value">{this.formatTime(this.props.eta)}</div>
         </div>
         <div className="location-bottom-bar">
           <div className="location-dots text-center">

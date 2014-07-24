@@ -15,7 +15,9 @@ var Location = React.createClass({
 
     return (
       <div className="location" style={style}>
-        <LocationTop key={this.props.data.key} index={this.props.index} />
+        <LocationTop key={this.props.data.key}
+                     index={this.props.index}
+                     eta={this.props.data.eta} />
         <LocationBottom />
       </div>
     );
