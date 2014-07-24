@@ -3,6 +3,7 @@
 var React = require('react')
   , LocationStore = require('../../stores/location-store')
   , UserStore = require('../../stores/user-store')
+  , BeaconStore = require('../../stores/beacon-store')
   , Location = require('../location/location.jsx')
   , Modal = require('../modal/modal.jsx')
   , events = require('../../shared/constants').events
@@ -23,7 +24,7 @@ var App = React.createClass({
   componentWillMount: function () {
     UserStore.onCurrentUserUpdated(this.handleCurrentUserUpdate);
     LocationStore.onLocationsUpdated(this.handleLocationsUpdate);
-    //BeaconStore.onClosestBeaconUpdated(this.handleClosestBeaconUpdated);
+    BeaconStore.onNewClosestBeacon(this.handleNewClosestBeacon);
   },
 
   handleCurrentUserUpdate: function () {
@@ -43,20 +44,25 @@ var App = React.createClass({
       this.setState({
         locations: locations
       });
+      this.switchToClosestLocation();
     }
   },
 
-  handleClosestBeaconUpdated: function () {
-    var closestBeacon = BeaconStore.getClosestBeacon()
-      , locationIndex = Object.keys(this.state.locations).indexOf(closestBeacon.id);
+  handleNewClosestBeacon: function () {
+    this.closestBeacon = BeaconStore.getCurrentBeacon();
+    this.switchToClosestLocation();
+  },
 
-    this.moveTo(locationIndex);
+  switchToClosestLocation: function () {
+    if (this.state.locations && this.closestBeacon) {
+      var locationIndex = Object.keys(this.state.locations).indexOf(this.closestBeacon.id);
+      this.moveTo(locationIndex);
+    }
   },
 
   componentDidUpdate: function () {
     var locations = this.getDOMNode().querySelectorAll('.location');
     this.setNumberOfPanes(locations.length);
-
   },
 
   componentDidMount: function () {

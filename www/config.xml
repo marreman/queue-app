@@ -27,10 +27,10 @@
   <preference name="DisallowOverscroll" value="true" />
 
 
-  <gap:plugin name="org.apache.cordova.device" />
-  <gap:plugin name="org.apache.cordova.dialogs" />
-  <gap:plugin name="org.apache.cordova.splashscreen" />
-  <gap:plugin name="pl.makingwaves.estimotebeacons" />
+  <!--<gap:plugin name="org.apache.cordova.device" />-->
+  <!--<gap:plugin name="org.apache.cordova.dialogs" />-->
+  <!--<gap:plugin name="org.apache.cordova.splashscreen" />-->
+  <!--<gap:plugin name="pl.makingwaves.estimotebeacons" />-->
 
   <icon src="www/graphics/icon/144x144.png" />
   <icon gap:platform="ios" height="57" src="www/graphics/icon/57x57.png" width="57" />

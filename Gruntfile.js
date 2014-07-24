@@ -18,7 +18,10 @@ module.exports = function(grunt) {
           'www/app/dist/bundle.js': ['www/app/src/app.js'],
         },
         options: {
-          transform: ['reactify']
+          transform: ['reactify'],
+          bundleOptions: {
+            debug: true
+          }
         }
       }
     },

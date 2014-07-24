@@ -5,6 +5,24 @@
     },
     "config_munge": {
         "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"EstimoteBeacons\"><param name=\"ios-package\" value=\"EstimoteBeacons\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
             "framework": {
                 "parents": {
                     "CoreBluetooth.framework": [
@@ -26,35 +44,17 @@
                         }
                     ]
                 }
-            },
-            "config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"EstimoteBeacons\"><param name=\"ios-package\" value=\"EstimoteBeacons\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
             }
         }
     },
     "installed_plugins": {
-        "pl.makingwaves.estimotebeacons": {
+        "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.phonegap.queue-app"
         },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "com.phonegap.queue-app"
         },
-        "org.apache.cordova.device": {
+        "pl.makingwaves.estimotebeacons": {
             "PACKAGE_NAME": "com.phonegap.queue-app"
         }
     },
