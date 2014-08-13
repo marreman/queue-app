@@ -44,7 +44,7 @@ var LocationTop = React.createClass({
             <span className="location-dot"></span>
           </div>
           <div className="location-white-bar location-number-of-people text-center">
-            46 st
+            {this.props.numberOfVisitors} st
             <span className="text-light"> sköna katter före dig</span>
             <div className="location-arrow">
               <Icon type="arrow" />

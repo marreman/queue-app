@@ -1,41 +1,42 @@
 {
   "locations" : {
     "30262-26692" : {
+      "eta" : "54066",
       "key" : "solidaritet",
-      "name" : "Solidaritet"
-    },
-    "61693-33634" : {
-      "key" : "tradgarden",
-      "name" : "Trädgården"
-    },
-    "7866-43187" : {
-      "key" : "strand",
-      "name" : "Strand"
-    }
-  },
-  "queueSessions" : {
-    "30262-26692" : {
-      "-JSbnOb20p7DpD26gXsd" : {
-        "end" : 1406195834599,
-        "start" : 1406195794548
+      "name" : "Solidaritet",
+      "visitors" : {
+        "females" : 14,
+        "males" : 3
       }
     },
     "61693-33634" : {
-      "-JSbmzCUqT8kWyvXxH8J" : {
-        "end" : 1406195726467,
-        "start" : 1406195639340
+      "eta" : "3880",
+      "key" : "tradgarden",
+      "name" : "Trädgården",
+      "visitors" : {
+        "females" : 45,
+        "males" : 14
+      }
+    },
+    "7866-43187" : {
+      "key" : "strand",
+      "name" : "Strand",
+      "visitors" : {
+        "females" : 82,
+        "males" : 52 
       }
     }
   },
   "users" : {
     "123" : {
-      "gender" : "trans"
+      "gender" : "male"
     },
     "95CCFDBD-5BB0-4870-9A16-6819C67BC007" : {
       "gender" : "female"
     },
     "D008013F-72FF-460A-BE84-989C5A8EA208" : {
-      "gender" : "trans"
+      "gender" : "female"
     }
   }
 }
+

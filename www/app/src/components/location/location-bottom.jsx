@@ -5,24 +5,24 @@ var React = require('react')
 
 var LocationBottom = React.createClass({
   render: function () {
+    var visitors = this.props.visitors
+      , numberOfVisitors = visitors.males + visitors.females;
+
     return (
       <div className="location-part">
         <div className="location-number-of-people text-center">
           <div className="location-arrow">
             <Icon type="arrow" direction="up" />
           </div>
-          46 st
+          {numberOfVisitors} st
           <span className="text-light"> sköna katter före dig</span>
         </div>
         <div className="location-gender-distribution">
           <div className="location-gender">
-            18 <Icon type="gender" mod="male" />
+            {visitors.males} <Icon type="gender" mod="male" />
           </div>
           <div className="location-gender">
-            22 <Icon type="gender" mod="female" />
-          </div>
-          <div className="location-gender">
-            4 <Icon type="gender" mod="trans" />
+            {visitors.females} <Icon type="gender" mod="female" />
           </div>
         </div>
       </div>
