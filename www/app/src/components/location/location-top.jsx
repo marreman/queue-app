@@ -57,7 +57,7 @@ var LocationTop = React.createClass({
 
   showModal: function (event) {
     event.preventDefault();
-    Mediator.emit(events.SHOW_MODAL);
+    Mediator.emit(events.SHOW_MODAL, this.props.index);
   }
 
 });

@@ -36,11 +36,13 @@ var Modal = React.createClass({
 
   render: function () {
     var style = { display: this.state.isVisible ? 'block' : 'none' }
-      , options = ['male', 'female', 'trans'].map(this.createGenderOption);
+      , options = ['male', 'female'].map(this.createGenderOption);
+
+    style.left = this.currentLocationIndex * 100 + '%';
 
     return (
       <div className="modal" style={style}>
-        <a className="modal-close" href onClick={this.toggleVisibility}>
+        <a className="modal-close" href onClick={this.hideModal}>
           <Icon type="close" />
         </a>
         <h1>Information</h1>
@@ -88,11 +90,13 @@ var Modal = React.createClass({
     }
   },
 
-  toggleVisibility: function (event) {
-    if (event) {
-      event.preventDefault();
-    }
+  hideModal: function (event) {
+    event.preventDefault();
+    this.toggleVisibility();
+  },
 
+  toggleVisibility: function (currentLocationIndex) {
+    this.currentLocationIndex = currentLocationIndex;
     this.setState({
       isVisible: !this.state.isVisible
     });
