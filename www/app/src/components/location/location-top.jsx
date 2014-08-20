@@ -43,7 +43,8 @@ var LocationTop = React.createClass({
             <span className="location-dot"></span>
             <span className="location-dot"></span>
           </div>
-          <div className="location-white-bar location-number-of-people text-center">
+          <div className="location-white-bar location-number-of-people text-center"
+               onClick={this.onLocationBarClick}>
             {this.props.numberOfVisitors} st
             <span className="text-light"> sköna katter före dig</span>
             <div className="location-arrow">
@@ -53,6 +54,11 @@ var LocationTop = React.createClass({
         </div>
       </div>
     );
+  },
+
+  onLocationBarClick: function (event) {
+    event.preventDefault();
+    Mediator.emit(events.LOCATION_BAR_CLICK);
   },
 
   showModal: function (event) {

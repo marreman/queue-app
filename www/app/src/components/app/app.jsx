@@ -25,6 +25,7 @@ var App = React.createClass({
     UserStore.onCurrentUserUpdated(this.handleCurrentUserUpdate);
     LocationStore.onLocationsUpdated(this.handleLocationsUpdate);
     BeaconStore.onNewClosestBeacon(this.handleNewClosestBeacon);
+    Mediator.on(events.LOCATION_BAR_CLICK, this.toggleVertical);
   },
 
   handleCurrentUserUpdate: function () {

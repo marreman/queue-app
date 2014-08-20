@@ -26,9 +26,9 @@ module.exports = {
     case 'right':
       this.moveTo(current.paneNumber - 1, undefined); break;
     case 'up':
-      this.move(undefined, win.height * -1); break;
+      this.moveUp(); break;
     case 'down':
-      this.move(undefined, 0); break;
+      this.moveDown(); break;
     }
   },
 
@@ -38,6 +38,20 @@ module.exports = {
     if (this.move(goal, undefined)) {
       current.paneNumber = paneNumber;
     }
+  },
+
+  toggleVertical: function () {
+    this[this.isUp ? 'moveDown' : 'moveUp']();
+  },
+
+  moveUp: function () {
+    this.move(undefined, win.height * -1);
+    this.isUp = true;
+  },
+
+  moveDown: function () {
+    this.move(undefined, 0);
+    this.isUp = false;
   },
 
   move: function (x, y) {

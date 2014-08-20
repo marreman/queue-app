@@ -6,6 +6,7 @@ module.exports = {
     USER_CREATE: null
   }),
   events: keyMirror({
-    SHOW_MODAL: null
+    SHOW_MODAL: null,
+    LOCATION_BAR_CLICK: null
   })
 };

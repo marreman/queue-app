@@ -26,13 +26,6 @@ module.exports = function(grunt) {
       }
     },
 
-    jshint: {
-      all: ['Gruntfile.js', files.js, files.jsx],
-      options: {
-        jshintrc: true
-      }
-    },
-
     recess: {
       dist: {
         options: {
@@ -79,6 +72,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['recess:lint', 'jshint']);
-  grunt.registerTask('test', ['browserify:dist', 'jasmine:test']);
 
 };

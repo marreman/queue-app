@@ -1,16 +1,20 @@
 /** @jsx React.DOM */
 
 var React = require('react')
-  , Icon = require('../icon.jsx');
+  , Icon = require('../icon.jsx')
+  , Mediator = require('../../shared/mediator')
+  , events = require('../../shared/constants').events;
 
 var LocationBottom = React.createClass({
+
   render: function () {
     var visitors = this.props.visitors
       , numberOfVisitors = visitors.males + visitors.females;
 
     return (
       <div className="location-part">
-        <div className="location-number-of-people text-center">
+        <div className="location-number-of-people text-center"
+             onClick={this.onLocationBarClick}>
           <div className="location-arrow">
             <Icon type="arrow" direction="up" />
           </div>
@@ -27,7 +31,13 @@ var LocationBottom = React.createClass({
         </div>
       </div>
     );
+  },
+
+  onLocationBarClick: function (event) {
+    event.preventDefault();
+    Mediator.emit(events.LOCATION_BAR_CLICK);
   }
+
 });
 
 module.exports = LocationBottom;
