@@ -26,6 +26,13 @@ module.exports = function(grunt) {
       }
     },
 
+    jshint: {
+      all: ['Gruntfile.js', files.js, files.jsx],
+      options: {
+        jshintrc: true
+      }
+    },
+
     recess: {
       dist: {
         options: {
