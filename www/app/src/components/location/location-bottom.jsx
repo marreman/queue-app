@@ -14,7 +14,7 @@ var LocationBottom = React.createClass({
     return (
       <div className="location-part">
         <div className="location-number-of-people text-center"
-             onClick={this.onLocationBarClick}>
+             onTouchEnd={this.onLocationBarClick}>
           <div className="location-arrow">
             <Icon type="arrow" direction="up" />
           </div>

@@ -42,7 +42,7 @@ var Modal = React.createClass({
 
     return (
       <div className="modal" style={style}>
-        <a className="modal-close" href onClick={this.hideModal}>
+        <a className="modal-close" href onTouchEnd={this.hideModal}>
           <Icon type="close" />
         </a>
         <h1>Information</h1>
@@ -55,7 +55,7 @@ var Modal = React.createClass({
           {options}
         </p>
         <p>
-          <a href className="button" onClick={this.confirmSelection}>Bekräfta val</a>
+          <a href className="button" onTouchEnd={this.confirmSelection}>Bekräfta val</a>
         </p>
       </div>
     );

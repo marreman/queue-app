@@ -29,7 +29,7 @@ var LocationTop = React.createClass({
           <span className="location-logo">
             <Logo locationKey={this.props.key} />
           </span>
-          <a href className="location-info" onClick={this.showModal}>
+          <a href className="location-info" onTouchEnd={this.showModal}>
             <Icon type="info" />
           </a>
         </div>
@@ -44,7 +44,7 @@ var LocationTop = React.createClass({
             <span className="location-dot"></span>
           </div>
           <div className="location-white-bar location-number-of-people text-center"
-               onClick={this.onLocationBarClick}>
+               onTouchEnd={this.onLocationBarClick}>
             {this.props.numberOfVisitors} st
             <span className="text-light"> sköna katter före dig</span>
             <div className="location-arrow">
