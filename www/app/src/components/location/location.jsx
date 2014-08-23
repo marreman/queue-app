@@ -8,20 +8,29 @@ var React = require('react')
 var Location = React.createClass({
   mixins: [assetsPathMixin],
   render: function () {
-    var bgUrl = this.getLocationPath(this.props.data.key) + '/background.jpg'
-      , visitors = this.props.data.visitors
-      , numberOfVisitors = visitors.males + visitors.females
+    var currentStatus = this.props.data.currentStatus
+
+      , estimatedQueueTime = currentStatus.estimatedQueueTime
+      , numberOfMales = currentStatus.numberOfMales
+      , numberOfFemales = currentStatus.numberOfFemales
+      , numberOfVisitors = numberOfMales + numberOfFemales
+
       , style = {
-        backgroundImage: 'url(' + bgUrl + ')'
+        backgroundImage: 'url(' + this.getLocationPath(this.props.data.key) + '/background.jpg' + ')'
       };
 
     return (
       <div className="location" style={style}>
+
         <LocationTop key={this.props.data.key}
                      index={this.props.index}
-                     eta={this.props.data.eta}
+                     eta={estimatedQueueTime}
                      numberOfVisitors={numberOfVisitors} />
-        <LocationBottom visitors={this.props.data.visitors} />
+
+        <LocationBottom males={numberOfMales}
+                        females={numberOfFemales}
+                        total={numberOfVisitors} />
+
       </div>
     );
   }

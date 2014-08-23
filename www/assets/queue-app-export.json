@@ -1,42 +1,44 @@
 {
   "locations" : {
     "30262-26692" : {
-      "eta" : "54066",
       "key" : "solidaritet",
       "name" : "Solidaritet",
-      "visitors" : {
-        "females" : 14,
-        "males" : 3
+      "currentStatus" : {
+        "estimatedQueueTime" : "54480251",
+        "numberOfFemales" : 14,
+        "numberOfMales" : 3
       }
     },
     "61693-33634" : {
-      "eta" : "3880",
       "key" : "tradgarden",
       "name" : "Trädgården",
-      "visitors" : {
-        "females" : 45,
-        "males" : 14
+      "currentStatus" : {
+        "estimatedQueueTime" : "54480251",
+        "numberOfFemales" : 14,
+        "numberOfMales" : 3
       }
     },
     "7866-43187" : {
       "key" : "strand",
       "name" : "Strand",
-      "visitors" : {
-        "females" : 82,
-        "males" : 52 
+      "currentStatus" : {
+        "estimatedQueueTime" : "54480251",
+        "numberOfFemales" : 14,
+        "numberOfMales" : 3
+      }
+    }
+  },
+  "queueSessions" : {
+    "30262-26692" : {
+      "-JUFeeazxr6MLtvieVUp" : {
+        "end" : 1407955152578,
+        "start" : 1407955152579
       }
     }
   },
   "users" : {
-    "123" : {
+    "DCB26D61-A9BC-4D3D-A128-EC5D243D1603" : {
       "gender" : "male"
-    },
-    "95CCFDBD-5BB0-4870-9A16-6819C67BC007" : {
-      "gender" : "female"
-    },
-    "D008013F-72FF-460A-BE84-989C5A8EA208" : {
-      "gender" : "female"
     }
   }
 }
-
