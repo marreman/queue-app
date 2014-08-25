@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.themobilelife.queue-estimote-background"
+    version="0.3.2">
+    <name>queue-estimote-background</name>
+    <description>Queue Estimote Background Plugin</description>
+    <license>MIT</license>
+    <keywords>phonegap,background geolocation</keywords>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <dependency id="org.apache.cordova.geolocation" />
+
+    <js-module src="www/js/estimote_background.js" name="EstimoteBackground">
+        <clobbers target="plugins.EstimoteBackground" />
+    </js-module>
+
+     <platform name="ios">
+        <!-- required background modes:  App registers for location updates -->
+        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+            <array>
+                <string>location</string>
+            </array>
+        </config-file>
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="EstimoteBackground">
+                <param name="ios-package" value="EstimoteBackground"/>
+            </feature>
+        </config-file>
+		<framework src="CoreBluetooth.framework" />
+		<framework src="CoreLocation.framework" />
+		<framework src="SystemConfiguration.framework" />
+		<source-file src="queue-estimote-background/src/ios/libEstimoteSDK.a" framework="true" />
+		<header-file src="queue-estimote-background/src/ios/ESTBeacon.h" />
+		<header-file src="queue-estimote-background/src/ios/ESTBeaconDefinitions.h" />
+		<header-file src="queue-estimote-background/src/ios/ESTBeaconManager.h" />
+		<header-file src="queue-estimote-background/src/ios/ESTBeaconRegion.h" />
+		<header-file src="queue-estimote-background/src/ios/ESTBeaconUpdateInfo.h" />
+        <header-file src="queue-estimote-background/src/ios/EstimoteBeacons.h" />
+        <source-file src="queue-estimote-background/src/ios/EstimoteBeacons.m" />
+        <header-file src="queue-estimote-background/src/ios/EstimoteBackground.h" />
+        <source-file src="queue-estimote-background/src/ios/EstimoteBackground.m" />
+     </platform>          
+
+</plugin>
