@@ -21,10 +21,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"EstimoteBackground\"><param name=\"ios-package\" value=\"EstimoteBackground\" /></feature>",
                             "count": 1
                         }
@@ -42,7 +38,7 @@
                     "CoreLocation.framework": [
                         {
                             "xml": "false",
-                            "count": 3
+                            "count": 2
                         }
                     ],
                     "SystemConfiguration.framework": [

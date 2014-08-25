@@ -13,7 +13,7 @@
         <engine name="cordova" version=">=3.0.0" />
     </engines>
 
-    <dependency id="org.apache.cordova.geolocation" />
+    <!-- <dependency id="org.apache.cordova.geolocation" />-->
 
     <js-module src="www/js/estimote_background.js" name="EstimoteBackground">
         <clobbers target="plugins.EstimoteBackground" />
