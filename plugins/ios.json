@@ -17,10 +17,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"EstimoteBeacons\"><param name=\"ios-package\" value=\"EstimoteBeacons\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"EstimoteBackground\"><param name=\"ios-package\" value=\"EstimoteBackground\" /></feature>",
                             "count": 1
                         }
@@ -32,19 +28,19 @@
                     "CoreBluetooth.framework": [
                         {
                             "xml": "false",
-                            "count": 2
+                            "count": 1
                         }
                     ],
                     "CoreLocation.framework": [
                         {
                             "xml": "false",
-                            "count": 2
+                            "count": 1
                         }
                     ],
                     "SystemConfiguration.framework": [
                         {
                             "xml": "false",
-                            "count": 2
+                            "count": 1
                         }
                     ],
                     "AudioToolbox.framework": [],
@@ -68,9 +64,6 @@
             "PACKAGE_NAME": "com.phonegap.queue-app"
         },
         "org.apache.cordova.console": {
-            "PACKAGE_NAME": "com.phonegap.queue-app"
-        },
-        "pl.makingwaves.estimotebeacons": {
             "PACKAGE_NAME": "com.phonegap.queue-app"
         },
         "com.themobilelife.queue-estimote-background": {
