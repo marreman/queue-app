@@ -33,6 +33,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSString* currentBeaconID;
 @property (nonatomic, strong) NSNumber* startTime;
 
+@property (nonatomic, strong) NSString* notificationText;
 
 @property (readwrite) NSTimeInterval lastTimeInQueue;
 
@@ -45,6 +46,8 @@ typedef enum : NSUInteger {
 - (void) cordovaInitEstimote:(CDVInvokedUrlCommand *)command {
     
     NSLog(@"cordovaInitEstimote");
+    
+    self.notificationText = @"";
     
     self.beaconState = EBBEACON_START_STATE;
     
@@ -61,7 +64,7 @@ typedef enum : NSUInteger {
 //        [self createUUIDWithGender];
 //    }
     
-    
+    [self getNotificationText];
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -133,6 +136,32 @@ typedef enum : NSUInteger {
     } withCancelBlock:^(NSError *error) {
         NSLog(@"error %@", error.description);
     }];
+    
+}
+
+- (void) getNotificationText{
+    
+    
+    [self.rootFirebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        
+        NSString* uuid = [self uniqueAppInstanceIdentifier];
+        
+        id textNode = snapshot.value[@"text"];
+        
+        NSLog(@"textNode = %@", textNode);
+        
+        id notificationTextNode = snapshot.value[@"text"][@"notification"];
+        
+        NSLog(@"notificationTextNode = %@", notificationTextNode);
+        
+        self.notificationText = notificationTextNode;
+        
+        
+    } withCancelBlock:^(NSError *error) {
+        NSLog(@"error %@", error.description);
+        
+    }];
+    
     
 }
 
@@ -208,12 +237,14 @@ typedef enum : NSUInteger {
         if(self.beaconState == EBBEACON_QUEUE_STATE && [beacon.distance floatValue] < RANGE_CLOSE_METER){
             
             
-//#ifdef DEBUG
+            
             UILocalNotification *notification = [UILocalNotification new];
-            notification.alertBody = [NSString stringWithFormat:@"%@: distance < %f", beacon.major, RANGE_CLOSE_METER];
+            
+            notification.alertBody = self.notificationText;
             
             [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-//#endif
+            
+            
             
             [self updateEndTime: beacon withBlock:^{
                 
@@ -251,8 +282,6 @@ typedef enum : NSUInteger {
     
     __block NSString* beaconID = [self getBeaconID:beacon];
     
-    NSLog(@"1 beaconID = %@", beaconID);
-    
     if(self.currentBeaconID && [beaconID isEqualToString:self.currentBeaconID]){
         
         __block NSString* uuid = [self uniqueAppInstanceIdentifier];
@@ -264,7 +293,6 @@ typedef enum : NSUInteger {
         [self.rootFirebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {// this block is called many times
             
             if(self.beaconState == EBBEACON_QUEUE_WAITINGDATA_STATE){
-                NSLog(@"observeEventType");
                 
                 id users = snapshot.value[@"users"];
                 id userUUID = users[uuid];
@@ -279,8 +307,6 @@ typedef enum : NSUInteger {
                 
                 ///
                 NSString* beaconID = [self getBeaconID:beaconBlock];
-                
-                NSLog(@"2 beaconID = %@", beaconID);
                 
                 NSString* queueURL = [NSString stringWithFormat:@"https://queue-app.firebaseio.com/queueSessions/%@", beaconID];
                 
