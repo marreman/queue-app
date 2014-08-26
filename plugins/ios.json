@@ -44,7 +44,37 @@
                         }
                     ],
                     "AudioToolbox.framework": [],
-                    "AVFoundation.framework": []
+                    "AVFoundation.framework": [],
+                    "libicucore.dylib": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "libc++.dylib": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "CFNetwork.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "Security.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "Firebase.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ]
                 }
             },
             "*-Info.plist": {
