@@ -272,7 +272,7 @@ typedef enum : NSUInteger {
                 //        NSLog(@"users = %@", users);
                 //        NSLog(@"userUUID = %@", userUUID);
                 
-                NSString* gender = @"";
+                NSString* gender = nil;
                 if(userUUID){
                     gender = userUUID[@"gender"];
                 }
