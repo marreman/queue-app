@@ -11,6 +11,7 @@
 #import <Firebase/Firebase.h>
 
 #define RANGE_CLOSE_METER (0.3f)
+#define TIME_WAIT_UNTIL_NEXT_QUEUE (60*60*12)
 
 typedef enum : NSUInteger {
     EBBEACON_START_STATE,
@@ -40,6 +41,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSString* currentBeaconID;
 @property (nonatomic, strong) NSNumber* startTime;
 
+
+@property (readwrite) NSTimeInterval lastTimeInQueue;
+
+
 @end
 
 @implementation EstimoteBackground
@@ -60,37 +65,10 @@ typedef enum : NSUInteger {
     NSLog(@"firebaseDeviceID = %@", firebaseDeviceID);
     
     
-//    NSString* uuid1 = [self uuidString];
-    __block NSString* uuid = [self uniqueAppInstanceIdentifier];
+//    {// for debugging without add gender in the web
+//        [self createUUIDWithGender];
+//    }
     
-    
-    NSLog(@"uuid = %@", uuid);
-    
-    
-    
-    
-//    [self.rootFirebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-////        NSLog(@"%@", snapshot.value);
-////        NSLog(@"%@", snapshot.value[@"users"]);
-////        NSLog(@"%@", snapshot.value[@"users"][uuid]);
-//        
-//        
-//        
-////        {// add gender
-////            
-////            Firebase* userFirebase = [[Firebase alloc] initWithUrl:@"https://queue-app.firebaseio.com/users"];
-////            
-////            Firebase* uuidFirebase = [userFirebase childByAppendingPath:uuid];
-////            
-////            [uuidFirebase setValue:@{@"gender":@"male"}];
-////        }
-//        
-//        
-//        
-//        
-//    } withCancelBlock:^(NSError *error) {
-//        NSLog(@"error %@", error.description);
-//    }];
     
     
     
@@ -106,12 +84,10 @@ typedef enum : NSUInteger {
     self.currentRegion.notifyEntryStateOnDisplay = YES;
     
     // start discovery
-    [self.beaconManager startEstimoteBeaconsDiscoveryForRegion:self.currentRegion];
-    
-    
-    [self.beaconManager startMonitoringForRegion:self.currentRegion];
+//    [self.beaconManager startEstimoteBeaconsDiscoveryForRegion:self.currentRegion];
+//    [self.beaconManager startMonitoringForRegion:self.currentRegion];
     [self.beaconManager startRangingBeaconsInRegion:self.currentRegion];
-    [self.beaconManager requestStateForRegion:self.currentRegion];
+//    [self.beaconManager requestStateForRegion:self.currentRegion];
     
     
     
@@ -119,14 +95,7 @@ typedef enum : NSUInteger {
     [self performSelector:@selector(endBGTask) withObject:nil afterDelay:3600];
     
     
-    // Create an instance of CDVPluginResult, with an OK status code.
-    // Set the return message as the Dictionary object (jsonObj)...
-    // ... to be serialized as JSON in the browser
-    CDVPluginResult *pluginResult = [ CDVPluginResult
-                                     resultWithStatus    : CDVCommandStatus_OK
-                                     messageAsDictionary : @{}
-                                     ];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    
 }
 
 - (void) endBGTask{
@@ -148,6 +117,31 @@ typedef enum : NSUInteger {
             [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
         }];
     }
+}
+
+- (void) createUUIDWithGender{
+    
+    [self.rootFirebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        
+        NSString* uuid = [self uniqueAppInstanceIdentifier];
+        
+        NSLog(@"%@", snapshot.value);
+        NSLog(@"%@", snapshot.value[@"users"]);
+        NSLog(@"%@", snapshot.value[@"users"][uuid]);
+        
+        {// add gender
+            
+            Firebase* userFirebase = [[Firebase alloc] initWithUrl:@"https://queue-app.firebaseio.com/users"];
+            
+            Firebase* uuidFirebase = [userFirebase childByAppendingPath:uuid];
+            
+            [uuidFirebase setValue:@{@"gender":@"male"}];
+        }
+        
+    } withCancelBlock:^(NSError *error) {
+        NSLog(@"error %@", error.description);
+    }];
+    
 }
 
 /// copy from phonegap code
@@ -200,56 +194,49 @@ typedef enum : NSUInteger {
 - (void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region
 {
     
+    __block NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
     
     for(ESTBeacon* beacon in beacons){
         
         
-        if(self.beaconState == EBBEACON_START_STATE){
-            [self updateStartTime: beacon];
-            
-            self.beaconState = EBBEACON_QUEUE_STATE;
+        if(self.beaconState == EBBEACON_START_STATE || self.beaconState == EBBEACON_END_STATE){
+            if((currentTime - self.lastTimeInQueue) > TIME_WAIT_UNTIL_NEXT_QUEUE){
+                [self updateStartTime: beacon];
+                
+                self.beaconState = EBBEACON_QUEUE_STATE;
+                
+                NSLog(@"It's over 12 hours");
+            }else{
+                NSLog(@"It's not 12 hours yet");
+            }
         }
         
-        NSLog(@"major: %@, distance: %@, proximity: %d", beacon.major, beacon.distance, beacon.proximity);
+        NSLog(@"major: %@, distance: %@, proximity: %d", beacon.major, beacon.distance, (int)beacon.proximity);
         
         if(self.beaconState == EBBEACON_QUEUE_STATE && [beacon.distance floatValue] < RANGE_CLOSE_METER){
             
             
-#ifdef DEBUG
+//#ifdef DEBUG
             UILocalNotification *notification = [UILocalNotification new];
             notification.alertBody = [NSString stringWithFormat:@"%@: distance < %f", beacon.major, RANGE_CLOSE_METER];
             
             [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-#endif
-            
-            
-            
-            
+//#endif
             
             [self updateEndTime: beacon withBlock:^{
                 
-                NSLog(@"self.bgTask = %d", self.bgTask);
+                NSLog(@"self.bgTask = %d", (int)self.bgTask);
                 
+                self.lastTimeInQueue = currentTime;
                 
                 [self performSelector:@selector(endBGTask) withObject:nil afterDelay:5];
                 
                 self.beaconState = EBBEACON_END_STATE;
             }];
             
-            
-            
-            
-            
-            
-            
         }
         
-        
-        
     }
-    
-//    double timeRemaining = [UIApplication sharedApplication].backgroundTimeRemaining;
-//    NSLog(@"timeRemaining = %f",timeRemaining);
     
     
 }
@@ -260,32 +247,9 @@ typedef enum : NSUInteger {
     
     self.currentBeaconID = beaconID;
     
-//    NSString* queueURL = [NSString stringWithFormat:@"https://queue-app.firebaseio.com/queueSessions/%@", beaconID];
-//    
-//    NSLog(@"queueURL = %@", queueURL);
-//    //        self.queueSessionKey
-//    Firebase* queueSessionsFirebase = [[Firebase alloc] initWithUrl:queueURL];
-    
-    
-//    NSLog(@"queueSessionsFirebase = %@", queueSessionsFirebase);
-    
-    
     NSNumber* startTime =  @((int)[[NSDate date] timeIntervalSince1970]);
     NSLog(@"startTime = %@", startTime);
     self.startTime = startTime;
-    
-    
-    
-    
-//    Firebase* childAutoIDFirebase = [queueSessionsFirebase childByAutoId];
-//    
-//    NSString* autoID = childAutoIDFirebase.description;
-//    NSLog(@"autoID = %@",autoID);
-//    self.queueSessionKey = autoID;
-//    
-//    [childAutoIDFirebase setValue:@{@"start" : startTime}];
-    
-    
     
 }
 
@@ -303,12 +267,9 @@ typedef enum : NSUInteger {
         
         self.beaconState = EBBEACON_QUEUE_WAITINGDATA_STATE;
         
-//        NSString* queueURL = [NSString stringWithFormat:@"https://queue-app.firebaseio.com/queueSessions/%@", beaconID];
-//        Firebase* queueSessionsFirebase = [[Firebase alloc] initWithUrl:queueURL];
-        
         __block ESTBeacon* beaconBlock = beacon;
         
-        [self.rootFirebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        [self.rootFirebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {// this block is called many times
             
             if(self.beaconState == EBBEACON_QUEUE_WAITINGDATA_STATE){
                 NSLog(@"observeEventType");
@@ -332,7 +293,6 @@ typedef enum : NSUInteger {
                 NSString* queueURL = [NSString stringWithFormat:@"https://queue-app.firebaseio.com/queueSessions/%@", beaconID];
                 
                 Firebase* queueSessionsFirebase = [[Firebase alloc] initWithUrl:queueURL];
-//
                 
                 Firebase* childAutoIDFirebase = [queueSessionsFirebase childByAutoId];
                 

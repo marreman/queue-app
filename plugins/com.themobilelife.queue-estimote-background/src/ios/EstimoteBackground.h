@@ -10,9 +10,9 @@
 #import <Cordova/CDV.h>
 
 
-#import "EstimoteBeacons.h"
+#import "EstimoteBackgroundBeacons.h"
 
-@interface EstimoteBackground : EstimoteBeacons
+@interface EstimoteBackground : EstimoteBackgroundBeacons
 
 
 - (void) cordovaInitEstimote:(CDVInvokedUrlCommand *)command ;

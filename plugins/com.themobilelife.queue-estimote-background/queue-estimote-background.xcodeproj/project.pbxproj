@@ -53,8 +53,8 @@
 		E57539EB19AC733B00CB28B8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E57539EA19AC733B00CB28B8 /* Security.framework */; };
 		E59161E619AB8A170034351F /* plugin.xml in Resources */ = {isa = PBXBuildFile; fileRef = E59161E519AB8A170034351F /* plugin.xml */; };
 		E59161FE19AB8E280034351F /* EstimoteBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = E59161FA19AB8E280034351F /* EstimoteBackground.m */; };
-		E59161FF19AB8E280034351F /* EstimoteBeacons.m in Sources */ = {isa = PBXBuildFile; fileRef = E59161FC19AB8E280034351F /* EstimoteBeacons.m */; };
 		E591620019AB8E280034351F /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E59161FD19AB8E280034351F /* libEstimoteSDK.a */; };
+		E5D567F719ACB17800A111F5 /* EstimoteBackgroundBeacons.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D567F619ACB17800A111F5 /* EstimoteBackgroundBeacons.m */; };
 		F840E1F1165FE0F500CFE078 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = F840E1F0165FE0F500CFE078 /* config.xml */; };
 /* End PBXBuildFile section */
 
@@ -137,9 +137,9 @@
 		E59161F819AB8E280034351F /* ESTBeaconVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconVO.h; sourceTree = "<group>"; };
 		E59161F919AB8E280034351F /* EstimoteBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimoteBackground.h; sourceTree = "<group>"; };
 		E59161FA19AB8E280034351F /* EstimoteBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimoteBackground.m; sourceTree = "<group>"; };
-		E59161FB19AB8E280034351F /* EstimoteBeacons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimoteBeacons.h; sourceTree = "<group>"; };
-		E59161FC19AB8E280034351F /* EstimoteBeacons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimoteBeacons.m; sourceTree = "<group>"; };
 		E59161FD19AB8E280034351F /* libEstimoteSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEstimoteSDK.a; sourceTree = "<group>"; };
+		E5D567F519ACB17800A111F5 /* EstimoteBackgroundBeacons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimoteBackgroundBeacons.h; sourceTree = "<group>"; };
+		E5D567F619ACB17800A111F5 /* EstimoteBackgroundBeacons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimoteBackgroundBeacons.m; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "queue-estimote-background/config.xml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -385,8 +385,8 @@
 				E59161F819AB8E280034351F /* ESTBeaconVO.h */,
 				E59161F919AB8E280034351F /* EstimoteBackground.h */,
 				E59161FA19AB8E280034351F /* EstimoteBackground.m */,
-				E59161FB19AB8E280034351F /* EstimoteBeacons.h */,
-				E59161FC19AB8E280034351F /* EstimoteBeacons.m */,
+				E5D567F519ACB17800A111F5 /* EstimoteBackgroundBeacons.h */,
+				E5D567F619ACB17800A111F5 /* EstimoteBackgroundBeacons.m */,
 				E59161FD19AB8E280034351F /* libEstimoteSDK.a */,
 			);
 			path = ios;
@@ -512,10 +512,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E59161FF19AB8E280034351F /* EstimoteBeacons.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				E59161FE19AB8E280034351F /* EstimoteBackground.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
+				E5D567F719ACB17800A111F5 /* EstimoteBackgroundBeacons.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

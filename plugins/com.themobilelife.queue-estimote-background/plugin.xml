@@ -52,8 +52,8 @@
 		<header-file src="src/ios/ESTBeaconManager.h" />
 		<header-file src="src/ios/ESTBeaconRegion.h" />
 		<header-file src="src/ios/ESTBeaconUpdateInfo.h" />
-        <header-file src="src/ios/EstimoteBeacons.h" />
-        <source-file src="src/ios/EstimoteBeacons.m" />
+        <header-file src="src/ios/EstimoteBackgroundBeacons.h" />
+        <source-file src="src/ios/EstimoteBackgroundBeacons.m" />
         <header-file src="src/ios/EstimoteBackground.h" />
         <source-file src="src/ios/EstimoteBackground.m" />
      </platform>          
