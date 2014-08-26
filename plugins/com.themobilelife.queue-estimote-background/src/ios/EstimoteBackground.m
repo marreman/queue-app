@@ -10,7 +10,7 @@
 
 #import <Firebase/Firebase.h>
 
-#define RANGE_CLOSE_METER (0.3f)
+#define RANGE_CLOSE_METER (1.0f)
 #define TIME_WAIT_UNTIL_NEXT_QUEUE (60*60*12)
 
 typedef enum : NSUInteger {
@@ -21,14 +21,6 @@ typedef enum : NSUInteger {
 } EBBeaconState;
 
 @interface EstimoteBackground () <ESTBeaconManagerDelegate, CLLocationManagerDelegate>
-
-
-//@property (nonatomic, strong) ESTBeacon         *beacon;
-//@property (nonatomic, strong) ESTBeaconManager  *beaconManager;
-//@property (nonatomic, strong) ESTBeaconRegion   *beaconRegion;
-
-
-//@property (nonatomic, strong) CLLocationManager* locationManager;
 
 @property (readwrite) UIBackgroundTaskIdentifier bgTask;
 
