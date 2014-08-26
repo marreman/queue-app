@@ -94,7 +94,7 @@ typedef enum : NSUInteger {
     
     
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     
     
     
@@ -115,10 +115,6 @@ typedef enum : NSUInteger {
     
     
     
-    self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        
-        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
-    }];
     
     [self performSelector:@selector(endBGTask) withObject:nil afterDelay:3600];
     
@@ -134,9 +130,25 @@ typedef enum : NSUInteger {
 }
 
 - (void) endBGTask{
-    [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+    if(self.bgTask){
+        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+    }
 }
 
+
+- (void) didEnterBackground{
+    
+    NSLog(@"didEnterBackground");
+    
+    
+    if(self.beaconState == EBBEACON_QUEUE_STATE || self.beaconState == EBBEACON_START_STATE){
+        
+        self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            
+            [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+        }];
+    }
+}
 
 /// copy from phonegap code
 - (NSString*)uniqueAppInstanceIdentifier
@@ -202,10 +214,13 @@ typedef enum : NSUInteger {
         
         if(self.beaconState == EBBEACON_QUEUE_STATE && [beacon.distance floatValue] < RANGE_CLOSE_METER){
             
+            
+#ifdef DEBUG
             UILocalNotification *notification = [UILocalNotification new];
             notification.alertBody = [NSString stringWithFormat:@"%@: distance < %f", beacon.major, RANGE_CLOSE_METER];
             
             [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+#endif
             
             
             
