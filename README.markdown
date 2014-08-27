@@ -1,4 +1,4 @@
-## Summary of application features
+## Application features
 
 1. Show the average queue time using **only** data from the latest hour
 2. Show the number of females, males and the sum of these using the same data
@@ -9,7 +9,7 @@ the different locations
 the estimote and then store this session (with the users gender) on the correct location
 
 
-### Some clarifications
+#### Application clarifications
 
 - "location" is referring to one of 3 night clubs' queues
 where this application will be used
@@ -17,3 +17,26 @@ where this application will be used
 - An "Estimote-zone" is the area where the Estimote is close
 enought to communicate with, and report its distance from,
 an iPhone
+
+## Development
+
+#### Installing dependencies
+
+This guide is assuming that you have node and npm installed.
+
+1. Run `npm install grunt-cli -g`
+2. Then from project root run `npm install`
+
+To be able to build you'll also need Phonegap. Install globally with `npm install phonegap -g`.
+
+#### When developing
+
+Run `grunt watch` to automatically compile less and js files when they're changed.
+
+#### To be able to build
+
+From project root directory:
+
+1. Run `grunt dist` which is concatinating the less and js files.
+2. Then `phonegap build ios`
+3. Open Xcode project with `open platforms/ios/Queue\ App.xcodeproj/`

@@ -79,5 +79,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['recess:lint', 'jshint']);
+  grunt.registerTask('dist', ['recess:dist', 'browserify:dist']);
 
 };

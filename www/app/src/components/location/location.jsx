@@ -8,11 +8,12 @@ var React = require('react')
 var Location = React.createClass({
   mixins: [assetsPathMixin],
   render: function () {
-    var currentStatus = this.props.data.currentStatus
+    var currentStatus = this.props.data.currentStatus || {}
 
       , estimatedQueueTime = currentStatus.estimatedQueueTime
       , numberOfMales = currentStatus.numberOfMales
       , numberOfFemales = currentStatus.numberOfFemales
+      , numberOfTrans = currentStatus.numberOfTrans
       , numberOfVisitors = numberOfMales + numberOfFemales
 
       , style = {
@@ -29,6 +30,7 @@ var Location = React.createClass({
 
         <LocationBottom males={numberOfMales}
                         females={numberOfFemales}
+                        trans={numberOfTrans}
                         total={numberOfVisitors} />
 
       </div>

@@ -4,3 +4,4 @@ bundle.js
 bundle.css
 npm-debug.log
 .idea
+.DS_Store
