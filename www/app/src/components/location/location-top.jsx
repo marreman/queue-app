@@ -34,8 +34,9 @@ var LocationTop = React.createClass({
           </a>
         </div>
         <div className="location-eta">
-          <div className="location-eta-label">Ungefärlig kötid:</div>
+          <div>Ungefärlig kötid:</div>
           <div className="location-eta-value">{this.formatTime(this.props.eta)}</div>
+          <div>minuter</div>
         </div>
         <div className="location-bottom-bar">
           <div className="location-dots text-center">

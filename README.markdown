@@ -1,5 +1,4 @@
-Summary of application features
--------------------------------
+## Summary of application features
 
 1. Show the average queue time using **only** data from the latest hour
 2. Show the number of females, males and the sum of these using the same data
@@ -10,8 +9,7 @@ the different locations
 the estimote and then store this session (with the users gender) on the correct location
 
 
-Some clarifications
--------------------
+### Some clarifications
 
 - "location" is referring to one of 3 night clubs' queues
 where this application will be used
