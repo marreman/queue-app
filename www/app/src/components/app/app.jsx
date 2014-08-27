@@ -20,7 +20,6 @@ var App = React.createClass({
       locations: {}
     };
   },
-
   componentWillMount: function () {
     UserStore.onCurrentUserUpdated(this.handleCurrentUserUpdate);
     LocationStore.onLocationsUpdated(this.handleLocationsUpdate);

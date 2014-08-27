@@ -56,7 +56,7 @@ var Modal = React.createClass({
           {options}
         </p>
         <p>
-          <a href className="button" onTouchEnd={this.confirmSelection}>Bekräfta val</a>
+          <a href className="button" onTouchEnd={this.confirmSelection}>BRA, VISA MIG KÖN</a>
         </p>
       </div>
     );
