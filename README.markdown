@@ -17,3 +17,24 @@ where this application will be used
 - An "Estimote-zone" is the area where the Estimote is close
 enought to communicate with, and report its distance from,
 an iPhone
+
+## Development
+
+### Installing dependencies
+
+This guide is assuming that you have node and npm installed.
+
+1. Run `npm install grunt-cli -g`
+2. Then from project root run `npm install`
+
+### When developing
+
+Run `grunt watch` to atomatically compile less and js files when they're changed.
+
+### Building
+
+From project root directory:
+
+1. Run `grunt dist` which is concatinating the less and js files.
+2. Then `phonegap build ios`
+3. Open Xcode project with `open platforms/ios/Queue\ App.xcodeproj/`
