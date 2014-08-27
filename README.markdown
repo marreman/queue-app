@@ -33,7 +33,7 @@ To be able to build you'll also need Phonegap. Install globally with `npm instal
 
 Run `grunt watch` to automatically compile less and js files when they're changed.
 
-#### Building
+#### To be able to build
 
 From project root directory:
 
