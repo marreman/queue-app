@@ -1,4 +1,4 @@
-## Summary of application features
+## Application features
 
 1. Show the average queue time using **only** data from the latest hour
 2. Show the number of females, males and the sum of these using the same data
@@ -9,7 +9,7 @@ the different locations
 the estimote and then store this session (with the users gender) on the correct location
 
 
-### Some clarifications
+#### Application clarifications
 
 - "location" is referring to one of 3 night clubs' queues
 where this application will be used
@@ -20,18 +20,20 @@ an iPhone
 
 ## Development
 
-### Installing dependencies
+#### Installing dependencies
 
 This guide is assuming that you have node and npm installed.
 
 1. Run `npm install grunt-cli -g`
 2. Then from project root run `npm install`
 
-### When developing
+To be able to build you'll also need Phonegap. Install globally with `npm install phonegap -g`.
 
-Run `grunt watch` to atomatically compile less and js files when they're changed.
+#### When developing
 
-### Building
+Run `grunt watch` to automatically compile less and js files when they're changed.
+
+#### Building
 
 From project root directory:
 
