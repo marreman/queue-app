@@ -13,6 +13,7 @@ var Location = React.createClass({
       , estimatedQueueTime = currentStatus.estimatedQueueTime
       , numberOfMales = currentStatus.numberOfMales
       , numberOfFemales = currentStatus.numberOfFemales
+      , numberOfTrans = currentStatus.numberOfTrans
       , numberOfVisitors = numberOfMales + numberOfFemales
 
       , style = {
@@ -29,6 +30,7 @@ var Location = React.createClass({
 
         <LocationBottom males={numberOfMales}
                         females={numberOfFemales}
+                        trans={numberOfTrans}
                         total={numberOfVisitors} />
 
       </div>

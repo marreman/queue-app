@@ -36,7 +36,7 @@ var Modal = React.createClass({
 
   render: function () {
     var style = { display: this.state.isVisible ? 'block' : 'none' }
-      , options = ['male', 'female'].map(this.createGenderOption);
+      , options = ['male', 'female', 'trans'].map(this.createGenderOption);
 
     style.left = this.currentLocationIndex * 100 + '%';
 
@@ -45,12 +45,13 @@ var Modal = React.createClass({
         <a className="modal-close" href onTouchEnd={this.hideModal}>
           <Icon type="close" />
         </a>
-        <h1>Information</h1>
+        <h1>Tjo!</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-          Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
+         Så var det dags för fest! Genom att använda Kö-kollen får du veta hur lång tid det är kvar till insläpp.
+         <br /><br />
+         Ju fler vi är som använder appen i kön, desto mer exakt blir kötiden. Samtidigt hjälper du andra att se kötiden innan de kommer till klubben.
         </p>
-        <p>Välj ditt kön nedan:</p>
+        <p>Katt eller kis?</p>
         <p>
           {options}
         </p>

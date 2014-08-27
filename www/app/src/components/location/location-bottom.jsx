@@ -16,7 +16,7 @@ var LocationBottom = React.createClass({
             <Icon type="arrow" direction="up" />
           </div>
           {this.props.total} st
-          <span className="text-light"> sköna katter före dig</span>
+          <span className="text-light"> Mänskliga antenner</span>
         </div>
         <div className="location-gender-distribution">
           <div className="location-gender">
@@ -24,6 +24,9 @@ var LocationBottom = React.createClass({
           </div>
           <div className="location-gender">
             {this.props.females} <Icon type="gender" mod="female" />
+          </div>
+          <div className="location-gender">
+            {this.props.trans} <Icon type="gender" mod="trans" />
           </div>
         </div>
       </div>
