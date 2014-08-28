@@ -39,13 +39,13 @@
 		<framework src="libc++.dylib" />
 		<framework src="CFNetwork.framework" />
 		<framework src="Security.framework" />
-		<framework src="src/ios/Firebase.framework" custom="true" />
         <header-file src="src/ios/Firebase.framework/Headers/FDataSnapshot.h"/>
         <header-file src="src/ios/Firebase.framework/Headers/FEventType.h"/>
         <header-file src="src/ios/Firebase.framework/Headers/Firebase.h"/>
         <header-file src="src/ios/Firebase.framework/Headers/FMutableData.h"/>
         <header-file src="src/ios/Firebase.framework/Headers/FQuery.h"/>
         <header-file src="src/ios/Firebase.framework/Headers/FTransactionResult.h"/>
+		<framework src="src/ios/Firebase.framework" custom="true" />
 		<source-file src="src/ios/libEstimoteSDK.a" framework="true" />
 		<header-file src="src/ios/ESTBeacon.h" />
 		<header-file src="src/ios/ESTBeaconDefinitions.h" />

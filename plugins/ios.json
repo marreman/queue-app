@@ -68,12 +68,6 @@
                             "xml": "false",
                             "count": 1
                         }
-                    ],
-                    "Firebase.framework": [
-                        {
-                            "xml": "false",
-                            "count": 1
-                        }
                     ]
                 }
             },
