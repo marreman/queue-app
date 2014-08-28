@@ -51,7 +51,8 @@ var Modal = React.createClass({
          <br /><br />
          Ju fler vi är som använder appen i kön, desto mer exakt blir kötiden. Samtidigt hjälper du andra att se kötiden innan de kommer till klubben.
         </p>
-        <p>Katt eller kis?</p>
+        <br />
+        <p>KATT ELLER KIS?</p>
         <p>
           {options}
         </p>
