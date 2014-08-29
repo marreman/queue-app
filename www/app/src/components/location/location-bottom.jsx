@@ -15,18 +15,18 @@ var LocationBottom = React.createClass({
           <div className="location-arrow">
             <Icon type="arrow" direction="up" />
           </div>
-          {this.props.total} st
+          {this.props.total || 0} st
           <span className="text-light"> Mänskliga antenner</span>
         </div>
         <div className="location-gender-distribution">
           <div className="location-gender">
-            {this.props.males} <Icon type="gender" mod="male" />
+            {this.props.males || 0} <Icon type="gender" mod="male" />
           </div>
           <div className="location-gender">
-            {this.props.females} <Icon type="gender" mod="female" />
+            {this.props.females || 0} <Icon type="gender" mod="female" />
           </div>
           <div className="location-gender">
-            {this.props.trans} <Icon type="gender" mod="trans" />
+            {this.props.trans || 0} <Icon type="gender" mod="trans" />
           </div>
         </div>
       </div>

@@ -3,7 +3,6 @@
 var React = require('react')
   , LocationStore = require('../../stores/location-store')
   , UserStore = require('../../stores/user-store')
-  , BeaconStore = require('../../stores/beacon-store')
   , Location = require('../location/location.jsx')
   , Modal = require('../modal/modal.jsx')
   , events = require('../../shared/constants').events
@@ -23,7 +22,6 @@ var App = React.createClass({
   componentWillMount: function () {
     UserStore.onCurrentUserUpdated(this.handleCurrentUserUpdate);
     LocationStore.onLocationsUpdated(this.handleLocationsUpdate);
-    BeaconStore.onNewClosestBeacon(this.handleNewClosestBeacon);
     Mediator.on(events.LOCATION_BAR_CLICK, this.toggleVertical);
   },
 
@@ -45,18 +43,6 @@ var App = React.createClass({
         locations: locations
       });
       this.switchToClosestLocation();
-    }
-  },
-
-  handleNewClosestBeacon: function () {
-    this.closestBeacon = BeaconStore.getCurrentBeacon();
-    this.switchToClosestLocation();
-  },
-
-  switchToClosestLocation: function () {
-    if (this.state.locations && this.closestBeacon) {
-      var locationIndex = Object.keys(this.state.locations).indexOf(this.closestBeacon.id);
-      this.moveTo(locationIndex);
     }
   },
 

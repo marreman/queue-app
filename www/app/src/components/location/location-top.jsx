@@ -46,7 +46,7 @@ var LocationTop = React.createClass({
           </div>
           <div className="location-white-bar location-number-of-people text-center"
                onTouchEnd={this.onLocationBarClick}>
-            {this.props.numberOfVisitors} st
+            {this.props.numberOfVisitors || 0} st
             <span className="text-light"> mänskliga antenner</span>
             <div className="location-arrow">
               <Icon type="arrow" />
