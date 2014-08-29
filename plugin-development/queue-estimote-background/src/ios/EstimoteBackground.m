@@ -237,6 +237,7 @@ typedef enum : NSUInteger {
         if(self.beaconState == EBBEACON_QUEUE_STATE && [beacon.distance floatValue] < RANGE_CLOSE_METER){
             
             
+            self.beaconState = EBBEACON_QUEUE_WAITINGDATA_STATE;
             
             UILocalNotification *notification = [UILocalNotification new];
             
@@ -286,7 +287,6 @@ typedef enum : NSUInteger {
         
         __block NSString* uuid = [self uniqueAppInstanceIdentifier];
         
-        self.beaconState = EBBEACON_QUEUE_WAITINGDATA_STATE;
         
         __block ESTBeacon* beaconBlock = beacon;
         
