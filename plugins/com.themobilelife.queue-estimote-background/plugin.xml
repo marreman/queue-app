@@ -3,17 +3,15 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.themobilelife.queue-estimote-background"
-    version="0.3.2">
+    version="0.5.4">
     <name>queue-estimote-background</name>
     <description>Queue Estimote Background Plugin</description>
     <license>MIT</license>
-    <keywords>phonegap,background geolocation</keywords>
+    <keywords>phonegap,background,bluetooth,geolocation</keywords>
 
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
-
-    <!-- <dependency id="org.apache.cordova.geolocation" />-->
 
     <js-module src="www/js/estimote_background.js" name="EstimoteBackground">
         <clobbers target="plugins.EstimoteBackground" />
@@ -56,6 +54,8 @@
         <source-file src="src/ios/EstimoteBackgroundBeacons.m" />
         <header-file src="src/ios/EstimoteBackground.h" />
         <source-file src="src/ios/EstimoteBackground.m" />
+        <header-file src="src/ios/EstimoteData.h" />
+        <source-file src="src/ios/EstimoteData.m" />
      </platform>          
 
 </plugin>

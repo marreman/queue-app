@@ -94,9 +94,5 @@
             "PACKAGE_NAME": "com.phonegap.queue-app"
         }
     },
-    "dependent_plugins": {
-        "org.apache.cordova.geolocation": {
-            "PACKAGE_NAME": "com.phonegap.queue-app"
-        }
-    }
+    "dependent_plugins": {}
 }
