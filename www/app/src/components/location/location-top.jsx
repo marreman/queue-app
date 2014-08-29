@@ -14,12 +14,12 @@ var LocationTop = React.createClass({
     dots[this.props.index].classList.add('location-dot-current');
   },
 
-  formatTime: function (milliseconds) {
-    if (!milliseconds) {
+  formatTime: function (seconds) {
+    if (!seconds) {
       return 'N/A';
     }
 
-    return time.millisecondsToHoursAndMinutes(milliseconds);
+    return time.secondsToMinutes(seconds);
   },
 
   render: function () {
