@@ -12,29 +12,14 @@ if (!window.EstimoteBeacons) {
   EstimoteMock.mockApi();
 }
 
-var beaconList = {}
-  , SESSION_END_THRESHOLD = 1.5;
+var beaconList = {};
 
-function Beacon() {
-  this.enteredZoneAt = new Date().getTime();
-}
+function Beacon() {}
 
 Beacon.prototype.update = function (data) {
   this.id = data.major + '-' + data.minor;
-  this.distance = data.distance;
-
-  if (!this.sessionRef && this.distance < SESSION_END_THRESHOLD) {
-    this.endSession();
-  }
-
+  this.distance = data.distance
   return this;
-};
-
-Beacon.prototype.endSession = function () {
-  this.sessionRef = ref.child(this.id).push({
-    start: this.enteredZoneAt,
-    end: new Date().getTime()
-  });
 };
 
 function handleGetBeacons(beaconsData) {
