@@ -47,6 +47,7 @@
 		5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE5B34173C68D80009041E /* CoreLocation.framework */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
+		E56102D519B0B40B006CEDB2 /* EstimoteData.m in Sources */ = {isa = PBXBuildFile; fileRef = E56102D419B0B40B006CEDB2 /* EstimoteData.m */; };
 		E57539E519AC729500CB28B8 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E57539E419AC729500CB28B8 /* Firebase.framework */; };
 		E57539E719AC732300CB28B8 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E57539E619AC732300CB28B8 /* libicucore.dylib */; };
 		E57539E919AC732B00CB28B8 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E57539E819AC732B00CB28B8 /* libc++.dylib */; };
@@ -122,6 +123,8 @@
 		5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* queue-estimote-background-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "queue-estimote-background-Info.plist"; path = "../queue-estimote-background-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
+		E56102D319B0B40B006CEDB2 /* EstimoteData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimoteData.h; sourceTree = "<group>"; };
+		E56102D419B0B40B006CEDB2 /* EstimoteData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimoteData.m; sourceTree = "<group>"; };
 		E57539E419AC729500CB28B8 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		E57539E619AC732300CB28B8 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		E57539E819AC732B00CB28B8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -385,6 +388,8 @@
 				E59161F819AB8E280034351F /* ESTBeaconVO.h */,
 				E59161F919AB8E280034351F /* EstimoteBackground.h */,
 				E59161FA19AB8E280034351F /* EstimoteBackground.m */,
+				E56102D319B0B40B006CEDB2 /* EstimoteData.h */,
+				E56102D419B0B40B006CEDB2 /* EstimoteData.m */,
 				E5D567F519ACB17800A111F5 /* EstimoteBackgroundBeacons.h */,
 				E5D567F619ACB17800A111F5 /* EstimoteBackgroundBeacons.m */,
 				E59161FD19AB8E280034351F /* libEstimoteSDK.a */,
@@ -513,6 +518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				E56102D519B0B40B006CEDB2 /* EstimoteData.m in Sources */,
 				E59161FE19AB8E280034351F /* EstimoteBackground.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				E5D567F719ACB17800A111F5 /* EstimoteBackgroundBeacons.m in Sources */,

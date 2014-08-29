@@ -9,9 +9,12 @@
 #import "EstimoteBackground.h"
 
 #import <Firebase/Firebase.h>
+#import "EstimoteData.h"
 
 #define RANGE_CLOSE_METER (1.0f)
 #define TIME_WAIT_UNTIL_NEXT_QUEUE (60*60*12)
+#define ROOT_FIREBASE_URL @"https://queue-app.firebaseio.com"
+#define ESTIMOTE_UUID @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"
 
 typedef enum : NSUInteger {
     EBBEACON_START_STATE,
@@ -26,17 +29,19 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, strong) Firebase* rootFirebase;
 
-@property (readwrite) EBBeaconState beaconState;
+//@property (readwrite) EBBeaconState beaconState;
 
 @property (nonatomic, strong) NSString* queueSessionKey;
 
-@property (nonatomic, strong) NSString* currentBeaconID;
-@property (nonatomic, strong) NSNumber* startTime;
+//@property (nonatomic, strong) NSString* currentBeaconID;
+//@property (nonatomic, strong) NSNumber* startTime;
 
 @property (nonatomic, strong) NSString* notificationText;
 
-@property (readwrite) NSTimeInterval lastTimeInQueue;
+//@property (readwrite) NSTimeInterval lastTimeInQueue;
 
+
+@property (nonatomic) NSMutableDictionary* beaconDataDict;
 
 @end
 
@@ -47,13 +52,14 @@ typedef enum : NSUInteger {
     
     NSLog(@"cordovaInitEstimote");
     
+    self.beaconDataDict = [NSMutableDictionary new];
+    
     self.notificationText = @"";
     
-    self.beaconState = EBBEACON_START_STATE;
     
     
     
-    self.rootFirebase = [[Firebase alloc] initWithUrl:@"https://queue-app.firebaseio.com/"];
+    self.rootFirebase = [[Firebase alloc] initWithUrl:ROOT_FIREBASE_URL];
     
     Firebase* firebaseDeviceID = [self.rootFirebase childByAutoId];
     
@@ -71,9 +77,9 @@ typedef enum : NSUInteger {
     
     
     
-    NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+    NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:ESTIMOTE_UUID];
     self.currentRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:proximityUUID
-                                                            identifier:@"RegionIdentifier"];
+                                                            identifier:@"QueueAppEstimoteBAckgroundRegion"];
 
     
     self.currentRegion.notifyEntryStateOnDisplay = YES;
@@ -105,13 +111,24 @@ typedef enum : NSUInteger {
     NSLog(@"didEnterBackground");
     
     
-    if(self.beaconState == EBBEACON_QUEUE_STATE || self.beaconState == EBBEACON_START_STATE){
+    
+    for(NSString* key in self.beaconDataDict.allKeys){
         
-        self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        EstimoteData* estimoteData = self.beaconDataDict[key];
+        
+        if(estimoteData
+           && (estimoteData.state == EBBEACON_QUEUE_STATE || estimoteData.state == EBBEACON_START_STATE)){
             
-            [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
-        }];
+            self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+                
+                [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+            }];
+            
+            break;
+        }
+        
     }
+    
 }
 
 - (void) createUUIDWithGender{
@@ -126,7 +143,7 @@ typedef enum : NSUInteger {
         
         {// add gender
             
-            Firebase* userFirebase = [[Firebase alloc] initWithUrl:@"https://queue-app.firebaseio.com/users"];
+            Firebase* userFirebase = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/users", ROOT_FIREBASE_URL]];
             
             Firebase* uuidFirebase = [userFirebase childByAppendingPath:uuid];
             
@@ -142,15 +159,12 @@ typedef enum : NSUInteger {
 - (void) getNotificationText{
     
     
-    [self.rootFirebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    NSString* textURL = [NSString stringWithFormat:@"%@/text", ROOT_FIREBASE_URL];
+    Firebase* textFirebase = [[Firebase alloc] initWithUrl:textURL];
+    
+    [textFirebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         
-        NSString* uuid = [self uniqueAppInstanceIdentifier];
-        
-        id textNode = snapshot.value[@"text"];
-        
-        NSLog(@"textNode = %@", textNode);
-        
-        id notificationTextNode = snapshot.value[@"text"][@"notification"];
+        id notificationTextNode = snapshot.value[@"notification"];
         
         NSLog(@"notificationTextNode = %@", notificationTextNode);
         
@@ -219,22 +233,41 @@ typedef enum : NSUInteger {
     
     for(ESTBeacon* beacon in beacons){
         
+        __block NSString* beaconID = [self getBeaconID:beacon];
         
-        if(self.beaconState == EBBEACON_START_STATE || self.beaconState == EBBEACON_END_STATE){
-            if((currentTime - self.lastTimeInQueue) > TIME_WAIT_UNTIL_NEXT_QUEUE){
-                [self updateStartTime: beacon];
+        EstimoteData* estimoteData = self.beaconDataDict[beaconID];
+        if(!estimoteData){
+            estimoteData = [EstimoteData new];
+            estimoteData.estimoteID = beaconID;
+            estimoteData.state = EBBEACON_START_STATE;
+            
+            
+        }
+        
+        
+        if(estimoteData.state == EBBEACON_START_STATE || estimoteData.state == EBBEACON_END_STATE){
+            if((currentTime - estimoteData.lastTimeInQueue) > TIME_WAIT_UNTIL_NEXT_QUEUE){
+
                 
-                self.beaconState = EBBEACON_QUEUE_STATE;
                 
-                NSLog(@"It's over 12 hours");
+                NSNumber* startTime =  @((int)[[NSDate date] timeIntervalSince1970]);
+                NSLog(@"startTime = %@", startTime);
+                estimoteData.startTime = startTime;
+                
+                
+                estimoteData.state = EBBEACON_QUEUE_STATE;
+                
+                NSLog(@"It's over 12 hours (id:%@)", beaconID);
             }else{
-                NSLog(@"It's not 12 hours yet");
+                NSLog(@"It's not 12 hours yet (id:%@)", beaconID);
             }
         }
         
+        
+        
         NSLog(@"major: %@, distance: %@, proximity: %d", beacon.major, beacon.distance, (int)beacon.proximity);
         
-        if(self.beaconState == EBBEACON_QUEUE_STATE && [beacon.distance floatValue] < RANGE_CLOSE_METER){
+        if(estimoteData.state == EBBEACON_QUEUE_STATE && [beacon.distance floatValue] < RANGE_CLOSE_METER){
             
             
             
@@ -250,11 +283,12 @@ typedef enum : NSUInteger {
                 
                 NSLog(@"self.bgTask = %d", (int)self.bgTask);
                 
-                self.lastTimeInQueue = currentTime;
+                EstimoteData* estimoteData = self.beaconDataDict[beaconID];
+                estimoteData.lastTimeInQueue = currentTime;
                 
                 [self performSelector:@selector(endBGTask) withObject:nil afterDelay:5];
                 
-                self.beaconState = EBBEACON_END_STATE;
+                estimoteData.state = EBBEACON_END_STATE;
             }];
             
         }
@@ -264,17 +298,7 @@ typedef enum : NSUInteger {
     
 }
 
-- (void) updateStartTime:(ESTBeacon*) beacon{
-    
-    NSString* beaconID = [self getBeaconID:beacon];
-    
-    self.currentBeaconID = beaconID;
-    
-    NSNumber* startTime =  @((int)[[NSDate date] timeIntervalSince1970]);
-    NSLog(@"startTime = %@", startTime);
-    self.startTime = startTime;
-    
-}
+
 
 - (void) updateEndTime:(ESTBeacon*) beacon withBlock:(void (^)(void))successBlock{
     
@@ -282,17 +306,20 @@ typedef enum : NSUInteger {
     
     __block NSString* beaconID = [self getBeaconID:beacon];
     
-    if(self.currentBeaconID && [beaconID isEqualToString:self.currentBeaconID]){
+    __block EstimoteData* estimoteData = self.beaconDataDict[beaconID];
+    
+    if(estimoteData
+       && (estimoteData.state == EBBEACON_QUEUE_STATE)){
         
         __block NSString* uuid = [self uniqueAppInstanceIdentifier];
         
-        self.beaconState = EBBEACON_QUEUE_WAITINGDATA_STATE;
+        estimoteData.state = EBBEACON_QUEUE_WAITINGDATA_STATE;
         
         __block ESTBeacon* beaconBlock = beacon;
         
         [self.rootFirebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {// this block is called many times
             
-            if(self.beaconState == EBBEACON_QUEUE_WAITINGDATA_STATE){
+            if(estimoteData.state == EBBEACON_QUEUE_WAITINGDATA_STATE){
                 
                 id users = snapshot.value[@"users"];
                 id userUUID = users[uuid];
@@ -308,7 +335,7 @@ typedef enum : NSUInteger {
                 ///
                 NSString* beaconID = [self getBeaconID:beaconBlock];
                 
-                NSString* queueURL = [NSString stringWithFormat:@"https://queue-app.firebaseio.com/queueSessions/%@", beaconID];
+                NSString* queueURL = [NSString stringWithFormat:@"%@/queueSessions/%@", ROOT_FIREBASE_URL, beaconID];
                 
                 Firebase* queueSessionsFirebase = [[Firebase alloc] initWithUrl:queueURL];
                 
@@ -319,9 +346,9 @@ typedef enum : NSUInteger {
                 NSNumber* endTime =  @((int)[[NSDate date] timeIntervalSince1970]);
                 
                 if(gender){
-                    [childAutoIDFirebase setValue:@{@"start":self.startTime, @"end":endTime, @"gender": gender}];
+                    [childAutoIDFirebase setValue:@{@"start":estimoteData.startTime, @"end":endTime, @"gender": gender}];
                 }else{
-                    [childAutoIDFirebase setValue:@{@"start":self.startTime, @"end":endTime}];
+                    [childAutoIDFirebase setValue:@{@"start":estimoteData.startTime, @"end":endTime}];
                 }
                 
                 successBlock();
