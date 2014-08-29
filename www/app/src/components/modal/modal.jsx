@@ -47,9 +47,11 @@ var Modal = React.createClass({
         </a>
         <h1>Tjo!</h1>
         <p>
-         Så var det dags för fest! Genom att använda Kö-kollen får du veta hur lång tid det är kvar till insläpp.
+         Så var det dags för fest! Genom att använda Kö-kollen får du veta
+         hur lång tid det är kvar till insläpp.
          <br /><br />
-         Ju fler vi är som använder appen i kön, desto mer exakt blir kötiden. Samtidigt hjälper du andra att se kötiden innan de kommer till klubben.
+         Ju fler vi är som använder appen i kön, desto mer exakt blir kötiden.
+         Samtidigt hjälper du andra att se kötiden innan de kommer till klubben.
         </p>
         <br />
         <p>KATT ELLER KIS?</p>

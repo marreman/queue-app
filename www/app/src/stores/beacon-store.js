@@ -1,10 +1,8 @@
 var device = require('../shared/device')
-  , firebase = require('../shared/firebase')
   , EventEmitter = require('events').EventEmitter;
 
 var currentBeacon = {}
   , events = new EventEmitter()
-  , ref = firebase.getReference('queueSessions')
   , NEW_CLOSEST_BEACON_EVENT = 'NEW_CLOSEST_BEACON_EVENT';
 
 if (!window.EstimoteBeacons) {
@@ -18,7 +16,7 @@ function Beacon() {}
 
 Beacon.prototype.update = function (data) {
   this.id = data.major + '-' + data.minor;
-  this.distance = data.distance
+  this.distance = data.distance;
   return this;
 };
 
