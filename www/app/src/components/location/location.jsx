@@ -14,7 +14,7 @@ var Location = React.createClass({
       , numberOfMales = currentStatus.numberOfMales
       , numberOfFemales = currentStatus.numberOfFemales
       , numberOfTrans = currentStatus.numberOfTrans
-      , numberOfVisitors = numberOfMales + numberOfFemales
+      , numberOfVisitors = currentStatus.totalNumberOfVisitors
 
       , style = {
         backgroundImage: 'url(' + this.getLocationPath(this.props.data.key) + '/background.jpg' + ')'
